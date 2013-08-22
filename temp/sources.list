@@ -1,5 +1,0 @@
-deb http://mirrors.163.com/ubuntu/ quantal main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ quantal-security main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ quantal-updates main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ quantal-proposed main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ quantal-backports main restricted universe multiverse
