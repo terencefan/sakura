@@ -13,4 +13,8 @@ setup(
     author_email="stdrickforce@gmail.com",
     packages=find_packages(),
     pacakage_data={},
+    install_requires=[
+        "Fabric>=1.6.0",
+        "Paramiko>=1.10",
+    ]
 )
