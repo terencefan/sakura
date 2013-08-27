@@ -1,0 +1,18 @@
+[color]
+    ui = auto
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    last = log -1 HEAD
+    unstage = reset HEAD --
+[core]
+    editor = vim
+    autocrlf = input
+    safecrlf = true
+[push]
+    default = current
+[rerere]
+    enabled = 1
+    autoupdate = 1
