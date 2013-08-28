@@ -1,0 +1,10 @@
+deb http://mirrors.163.com/ubuntu/ raring main universe restricted multiverse
+deb-src http://mirrors.163.com/ubuntu/ raring main universe restricted multiverse
+deb http://mirrors.163.com/ubuntu/ raring-security universe main multiverse restricted
+deb-src http://mirrors.163.com/ubuntu/ raring-security universe main multiverse restricted
+deb http://mirrors.163.com/ubuntu/ raring-updates universe main multiverse restricted
+deb http://mirrors.163.com/ubuntu/ raring-proposed universe main multiverse restricted
+deb-src http://mirrors.163.com/ubuntu/ raring-proposed universe main multiverse restricted
+deb http://mirrors.163.com/ubuntu/ raring-backports universe main multiverse restricted
+deb-src http://mirrors.163.com/ubuntu/ raring-backports universe main multiverse restricted
+deb-src http://mirrors.163.com/ubuntu/ raring-updates universe main multiverse restricted
