@@ -81,7 +81,6 @@ if has('gui_running')
     if filereadable(expand("~/.vim/bundle/vim-colorschemes/colors/jellybeans.vim"))
         colorscheme jellybeans
     endif
-    set guifont=Monaco:h12     " set gui font
     set guioptions-=T          " remove the toolbar
     set guioptions-=L          " remove the left scrollbar
     set guioptions-=r          " remove the right scrollbar
@@ -133,15 +132,16 @@ set listchars=tab:>\ ,trail:\ ,extends:#,nbsp:\  " Highlight problematic whitesp
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Formatting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set wrap          " wrap long lines
-set lbr           " set linebreak
-set tw=0          " sets the text width
-set ai            " Auto indent
-set si            " Smart indet
-set expandtab     " tabs are spaces, not tabs
-set shiftwidth=4  " use indents of 4 spaces
-set tabstop=4     " an indentation every four columns
-set softtabstop=4 " let backspace delete indent
+set wrap            " wrap long lines
+set linebreak       " set linebreak
+set textwidth=0     " sets the text width
+set autoindent      " Auto indent
+set smartindent     " Smart indet
+set expandtab       " tabs are spaces, not tabs
+set smarttab        " Smart tab
+set shiftwidth=4    " use indents of 4 spaces
+set tabstop=4       " an indentation every four columns
+set softtabstop=4   " let backspace delete indent
 " Remove trailing whitespaces and ^M chars
 "autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
@@ -398,10 +398,10 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
     " <C-h>, <BS>: close popup and delete backword char.
-    inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-    inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-    inoremap <expr><C-y>  neocomplcache#close_popup()
-    inoremap <expr><C-e>  neocomplcache#cancel_popup()
+    " inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+    " inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+    " inoremap <expr><C-y>  neocomplcache#close_popup()
+    " inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
     " Enable omni completion.
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
