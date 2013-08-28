@@ -1,0 +1,10 @@
+deb http://ftp.sjtu.edu.cn/ubuntu/ lucid main multiverse restricted universe
+deb http://ftp.sjtu.edu.cn/ubuntu/ lucid-backports main multiverse restricted universe
+deb http://ftp.sjtu.edu.cn/ubuntu/ lucid-proposed main multiverse restricted universe
+deb http://ftp.sjtu.edu.cn/ubuntu/ lucid-security main multiverse restricted universe
+deb http://ftp.sjtu.edu.cn/ubuntu/ lucid-updates main multiverse restricted universe
+deb-src http://ftp.sjtu.edu.cn/ubuntu/ lucid main multiverse restricted universe
+deb-src http://ftp.sjtu.edu.cn/ubuntu/ lucid-backports main multiverse restricted universe
+deb-src http://ftp.sjtu.edu.cn/ubuntu/ lucid-proposed main multiverse restricted universe
+deb-src http://ftp.sjtu.edu.cn/ubuntu/ lucid-security main multiverse restricted universe
+deb-src http://ftp.sjtu.edu.cn/ubuntu/ lucid-updates main multiverse restricted universe
