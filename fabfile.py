@@ -35,7 +35,7 @@ def bash():
     files = ['bashrc', 'bash_aliases', 'bash_prompt']
     for f in files:
         local('sudo cp {}{} ~/.{}'.format(file_path, f, f))
-    local('source ~/.bashrc')
+    local('source ~/.bashrc', shell='/bin/bash')
 
 def fast():
     bash()

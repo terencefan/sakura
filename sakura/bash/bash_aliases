@@ -19,10 +19,16 @@ alias cdwjs='cd ~/workspace/eleme/walle/web/walle/js/walle/'
 
 # Zeus2.
 alias cdz='cd ~/workspace/eleme/zeus2/'
-alias cdza='cd ~/workspace/eleme/zeus2/zeus/eas/'
+alias cdza='cd ~/workspace/eleme/zeus2/zeus/oas/'
 alias cdzo='cd ~/workspace/eleme/zeus2/zeus/eos/'
 alias cdzr='cd ~/workspace/eleme/zeus2/zeus/ers/'
 alias cdzu='cd ~/workspace/eleme/zeus2/zeus/eus/'
+
+alias cdzt='cd ~/workspace/eleme/zeus2/tests/'
+alias cdzat='cd ~/workspace/eleme/zeus2/tests/functional/oas/'
+alias cdzot='cd ~/workspace/eleme/zeus2/tests/functional/eos/'
+alias cdzrt='cd ~/workspace/eleme/zeus2/tests/functional/ers/'
+alias cdzut='cd ~/workspace/eleme/zeus2/tests/functional/eus/'
 
 alias pkz='sh ~/bats/stop_zeus'
 
