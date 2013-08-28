@@ -16,3 +16,6 @@
 [rerere]
     enabled = 1
     autoupdate = 1
+[user]
+    name = stdrickforce
+    email = stdrickforce@gmail.com

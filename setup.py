@@ -14,7 +14,11 @@ setup(
     packages=find_packages(),
     pacakage_data={},
     install_requires=[
-        "Fabric>=1.6.0",
-        "Paramiko>=1.10",
+        "fabric>=1.6.0",
+        "pip>=1.4.1",
+        "paramiko>=1.10",
+        "virtualenv>=1.10.1",
+        "virtualenvwrapper>=4.1.1",
+        "autoenv>=1.0.0",
     ]
 )
