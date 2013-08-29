@@ -11,6 +11,7 @@ alias cdsa='cd ~/workspace/sakura/'
 # Eleme aliases.
 # --------------
 alias sshed='ssh -t elemedev@192.168.108.120'
+alias sshet='ssh -t elemedev@testing'
 
 # Walle.
 alias cdw='cd ~/workspace/eleme/walle/'

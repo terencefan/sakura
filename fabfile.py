@@ -2,9 +2,8 @@
 
 import datetime
 import os
-import fileinput
 
-from fabric.api import env, cd, execute, local, task
+from fabric.api import env, execute, local, task
 
 FILE_NOT_FOUND = u'文件未找到: {}'
 
@@ -22,7 +21,8 @@ VERSION_NAME = {
 }
 
 # env.hosts = ['elemedev@192.168.108.120']
-env.hosts = []
+env.hosts = ['elemedev@192.168.108.120', 'elemedev@testing']
+
 
 def backup(file_path, exc=False):
     if os.path.exists(file_path):
@@ -46,7 +46,11 @@ def bash():
     file_path = 'sakura/bash/'
     files = ['bashrc', 'bash_aliases', 'bash_prompt']
     for f in files:
-        local('cp {}{} ~/.{}'.format(file_path, f, f))
+        input_file = open('{}{}'.format(file_path, f), 'r')
+        output_file = open('~/.{}'.format(f), 'w')
+        output_file.write(input_file.read())
+        input_file.close()
+        output_file.close()
     local('source ~/.bashrc', shell='/bin/bash')
 
 @task
@@ -59,19 +63,22 @@ def hosts():
     local('/etc/init.d/networking restart')
 
 
+# For Ubuntu Only
 @task
 def install():
     require_apts = ['git', 'ssh', 'vim', 'vim-gnome', 'ncurses-base',
-                    'openssh-server']
+                    'openssh-server', 'mysql-server', 'mysql-client',
+                    'libmysqlclient-dev', 'libevent-dev', 'mytop', 'gcc',
+                    'python-dev', 'zlibc', 'zlib1g-dev']
     for apt in require_apts:
-        local('apt-get install {}'.format(apt))
+        local('apt-get -y install {}'.format(apt))
 
 # For Ubuntu Only
 @task
 def source():
     content = local('lsb_release -a', capture=True)
-    params =  {item[0]:item[1].strip() for item in \
-        [item.split(':') for item in content.split('\n')]}
+    params =  {b[0]:b[1].strip() for b in \
+        [a.split(':') for a in content.split('\n')]}
     version = params.get('Release')
 
     version_name = VERSION_NAME[version]
@@ -90,13 +97,16 @@ def source():
 
 
 @task
-def ssh():
+def ssh(server=False):
     if not path_exists('~/.ssh/'):
         local('mkdir ~/.ssh/')
     if not path_exists('~/.ssh/id_dsa'):
         local("ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa")
     # ssh localhost
     local('cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys')
+
+    if not server:
+        return
 
     for host in env.hosts:
         local('scp ~/.ssh/id_dsa.pub {}:~/.ssh/authorized_keys'.format(host))
