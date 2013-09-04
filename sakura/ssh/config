@@ -1,0 +1,77 @@
+Host pg-misc-0
+    User stdrickforce
+    IdentityFile ~/.ssh/id_rsa
+    Identitiesonly yes
+    ControlMaster no
+    Compression yes
+
+Host p-*
+    User stdrickforce
+    IdentityFile ~/.ssh/id_rsa
+    Identitiesonly yes
+    UserKnownHostsFile ~/.ssh/known_hosts
+    ProxyCommand ssh pg-misc-0 nc %h %p
+    Compression yes
+
+Host p-web-0
+    Hostname 192.168.1.9
+
+Host p-web-1
+    Hostname 192.168.1.11
+
+Host p-web-2
+    Hostname 192.168.1.12
+
+Host p-web-3
+    Hostname 192.168.1.13
+
+Host p-web-4
+    Hostname 192.168.1.14
+
+Host p-mysql-0
+    Hostname 192.168.1.30
+
+Host p-mysql-1
+    Hostname 192.168.1.40
+
+Host p-mysql-2
+    Hostname 192.168.1.42
+
+Host p-mysql-3
+    Hostname 192.168.1.44
+
+Host p-mysql-4
+    Hostname 192.168.1.46
+
+Host p-mysql-5
+    Hostname 192.168.1.48
+
+Host p-cache-0
+    Hostname 192.168.1.60
+
+Host p-cache-1
+    Hostname 192.168.1.62
+
+Host p-cache-2
+    Hostname 192.168.1.64
+
+Host p-service-0
+    Hostname 192.168.1.80
+
+Host p-service-1
+    Hostname 192.168.1.82
+
+Host p-service-2
+    Hostname 192.168.1.84
+
+Host p-es-0
+    Hostname 192.168.1.150
+
+Host p-file-0
+    Hostname 192.168.1.100
+
+Host p-lb-0
+    Hostname 192.168.1.120
+
+Host p-lb-1
+    Hostname 192.168.1.121

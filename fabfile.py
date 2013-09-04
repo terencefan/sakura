@@ -101,16 +101,16 @@ def source():
 def ssh(server=False):
     if not path_exists('~/.ssh/'):
         local('mkdir ~/.ssh/')
-    if not path_exists('~/.ssh/id_dsa'):
-        local("ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa")
+    if not path_exists('~/.ssh/id_rsa'):
+        local("ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa")
     # ssh localhost
-    local('cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys')
+    local('cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys')
 
     if not server:
         return
 
     for host in env.hosts:
-        local('scp ~/.ssh/id_dsa.pub {}:~/.ssh/authorized_keys'.format(host))
+        local('scp ~/.ssh/id_rsa.pub {}:~/.ssh/authorized_keys'.format(host))
 
 
 @task
