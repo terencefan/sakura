@@ -24,6 +24,7 @@ VERSION_NAME = {
 # env.hosts = ['elemedev@192.168.108.120']
 env.hosts = []
 
+
 def backup(file_path, exc=False):
     if os.path.exists(file_path):
         local('cp {} {}.{}'.format(
