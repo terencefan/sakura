@@ -25,12 +25,14 @@ alias cdz='cd ~/workspace/eleme/zeus2/'
 alias cdza='cd ~/workspace/eleme/zeus2/zeus/oas/'
 alias cdzo='cd ~/workspace/eleme/zeus2/zeus/eos/'
 alias cdzr='cd ~/workspace/eleme/zeus2/zeus/ers/'
+alias cdzs='cd ~/workspace/eleme/zeus2/zeus/sms/'
 alias cdzu='cd ~/workspace/eleme/zeus2/zeus/eus/'
 
 alias cdzt='cd ~/workspace/eleme/zeus2/tests/'
 alias cdzat='cd ~/workspace/eleme/zeus2/tests/functional/oas/'
 alias cdzot='cd ~/workspace/eleme/zeus2/tests/functional/eos/'
 alias cdzrt='cd ~/workspace/eleme/zeus2/tests/functional/ers/'
+alias cdzst='cd ~/workspace/eleme/zeus2/tests/functional/sms/'
 alias cdzut='cd ~/workspace/eleme/zeus2/tests/functional/eus/'
 
 alias pkz='sh ~/bats/stop_zeus'
@@ -38,11 +40,13 @@ alias pkz='sh ~/bats/stop_zeus'
 alias zas='zeus_oas_server'
 alias zos='zeus_eos_server'
 alias zrs='zeus_ers_server'
+alias zss='zeus_sms_server'
 alias zus='zeus_eus_server'
 
 alias zah='zeus_oas_helper'
 alias zoh='zeus_eos_helper'
 alias zrh='zeus_ers_helper'
+alias zsh='zeus_sms_helper'
 alias zuh='zeus_eus_helper'
 
 # Earthshaker.
