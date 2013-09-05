@@ -7,7 +7,7 @@ from fabric.api import env, execute, local, task
 
 FILE_NOT_FOUND = u'文件未找到: {}'
 
-USERNAME = 'stdrickforce'
+USERNAME = 'eleme'
 PASSWORD = 'jkluio'
 
 # ubuntu, 163, sjtu
@@ -38,20 +38,19 @@ def backup(file_path, exc=False):
 
 
 def path_exists(file_path):
-    file_path = file_path.replace('~', '/home/{}'.format(USERNAME), 1)
+    # for ubuntu
+    # file_path = file_path.replace('~', '/home/{}'.format(USERNAME), 1)
+    # for mac osx
+    file_path = file_path.replace('~', '/Users/{}'.format(USERNAME), 1)
     return os.path.exists(file_path)
 
 
 @task
 def bash():
     file_path = 'sakura/bash/'
-    files = ['bashrc', 'bash_aliases', 'bash_prompt']
+    files = ['bashrc', 'bash_aliases', 'bash_profile', 'bash_prompt']
     for f in files:
-        input_file = open('{}{}'.format(file_path, f), 'r')
-        output_file = open('~/.{}'.format(f), 'w')
-        output_file.write(input_file.read())
-        input_file.close()
-        output_file.close()
+        local('cp sakura/bash/{} ~/.{}'.format(f, f))
     local('source ~/.bashrc', shell='/bin/bash')
 
 @task
@@ -101,8 +100,11 @@ def source():
 def ssh(server=False):
     if not path_exists('~/.ssh/'):
         local('mkdir ~/.ssh/')
-    if not path_exists('~/.ssh/id_rsa'):
-        local("ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa")
+
+    keys = ['id_rsa', 'id_rsa.pub']
+    for key in keys:
+        local("cp sakura/ssh/{} ~/.ssh/{}".format(key, key))
+
     # ssh localhost
     local('cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys')
 
@@ -145,6 +147,8 @@ def vim():
         if path_exists(path):
             continue
         local('git clone {} {}'.format(url, path))
+
+    local('cp sakura/vim/vimrc ~/.vimrc')
 
 @task
 def build():
