@@ -32,7 +32,7 @@ alias cdzrt='cd ~/workspace/eleme/zeus2/tests/functional/ers/'
 alias cdzst='cd ~/workspace/eleme/zeus2/tests/functional/sms/'
 alias cdzut='cd ~/workspace/eleme/zeus2/tests/functional/eus/'
 
-alias pkz='sh ~/bats/stop_zeus'
+alias pkz='pkill -9 zhelper'
 
 alias zah='zhelper oas'
 alias zoh='zhelper eos'

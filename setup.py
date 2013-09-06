@@ -15,6 +15,7 @@ setup(
     pacakage_data={},
     install_requires=[
         "autoenv>=1.0.0",
+        "cython>=0.19.1",
         "fabric>=1.6.0",
         "pip>=1.4.1",
         "pyflakes>=0.7.3",
