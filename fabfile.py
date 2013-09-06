@@ -7,7 +7,7 @@ from fabric.api import env, execute, local, task
 
 FILE_NOT_FOUND = u'文件未找到: {}'
 
-USERNAME = 'eleme'
+USERNAME = 'stdrickforce'
 PASSWORD = 'jkluio'
 
 # ubuntu, 163, sjtu
@@ -20,9 +20,7 @@ VERSION_NAME = {
     '10.04': 'lucid',
 }
 
-# env.hosts = ['elemedev@192.168.108.120']
 env.hosts = ['elemedev@192.168.108.120', 'elemedev@testing']
-
 
 
 def backup(file_path, exc=False):
@@ -60,7 +58,7 @@ def git():
 @task
 def hosts():
     local('cp {} {}'.format('sakura/hosts/hosts', '/etc/hosts'))
-    local('/etc/init.d/networking restart')
+    # local('/etc/init.d/networking restart')
 
 
 # For Ubuntu Only
