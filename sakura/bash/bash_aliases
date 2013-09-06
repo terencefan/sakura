@@ -34,17 +34,11 @@ alias cdzut='cd ~/workspace/eleme/zeus2/tests/functional/eus/'
 
 alias pkz='sh ~/bats/stop_zeus'
 
-alias zas='zeus_oas_server'
-alias zos='zeus_eos_server'
-alias zrs='zeus_ers_server'
-alias zss='zeus_sms_server'
-alias zus='zeus_eus_server'
-
-alias zah='zeus_oas_helper'
-alias zoh='zeus_eos_helper'
-alias zrh='zeus_ers_helper'
-alias zsh='zeus_sms_helper'
-alias zuh='zeus_eus_helper'
+alias zah='zhelper oas'
+alias zoh='zhelper eos'
+alias zrh='zhelper ers'
+alias zsh='zhelper sms'
+alias zuh='zhelper eus'
 
 # Earthshaker.
 alias cde='cd ~/workspace/eleme/earthshaker/'
