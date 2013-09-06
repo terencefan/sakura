@@ -45,15 +45,16 @@ def path_exists(file_path):
 
 @task
 def bash():
-    file_path = 'sakura/bash/'
     files = ['bashrc', 'bash_aliases', 'bash_profile', 'bash_prompt']
     for f in files:
         local('cp sakura/bash/{} ~/.{}'.format(f, f))
     local('source ~/.bashrc', shell='/bin/bash')
 
+
 @task
 def git():
     local('cp {} {}'.format('sakura/git/gitconfig', '~/.gitconfig'))
+
 
 @task
 def hosts():
@@ -71,12 +72,13 @@ def install():
     for apt in require_apts:
         local('apt-get -y install {}'.format(apt))
 
+
 # For Ubuntu Only
 @task
 def source():
     content = local('lsb_release -a', capture=True)
-    params =  {b[0]:b[1].strip() for b in \
-        [a.split(':') for a in content.split('\n')]}
+    key_val_list = [a.split(':') for a in content.split('\n')]
+    params = {b[0]: b[1].strip() for b in key_val_list}
     version = params.get('Release')
 
     version_name = VERSION_NAME[version]
@@ -122,6 +124,7 @@ def tmux():
 def upgrade():
     local('apt-get upgrade')
 
+
 @task
 def vim():
     dir_paths = ['~/.vim/', '~/.vim/backup/', '~/.vim/undo']
@@ -147,6 +150,7 @@ def vim():
         local('git clone {} {}'.format(url, path))
 
     local('cp sakura/vim/vimrc ~/.vimrc')
+
 
 @task
 def build():
