@@ -172,9 +172,6 @@ map <Leader>= <C-w>=
 " Remap VIM 0
 map 0 ^
 
-" lazy press <ESC>
-inoremap jk <Esc>
-
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
