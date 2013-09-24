@@ -8,6 +8,8 @@ alias redis-server='redis-server /usr/local/etc/redis.conf'
 alias cdin='cd ~/workspace/inori/'
 alias cdsa='cd ~/workspace/sakura/'
 
+alias pweb='python -m SimpleHTTPServer'
+
 # Eleme aliases.
 # --------------
 alias sshed='ssh -t elemedev@192.168.108.120'
