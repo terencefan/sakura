@@ -14,13 +14,10 @@ setup(
     packages=find_packages(),
     pacakage_data={},
     install_requires=[
-        "autoenv>=1.0.0",
         "cython>=0.19.1",
         "fabric>=1.6.0",
         "pip>=1.4.1",
         "pyflakes>=0.7.3",
         "setuptools>=0.7",
-        "virtualenv>=1.10.1",
-        "virtualenvwrapper>=4.1.1",
     ]
 )
