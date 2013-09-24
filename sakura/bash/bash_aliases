@@ -16,6 +16,9 @@ alias sshed='ssh -t elemedev@192.168.108.120'
 alias sshet='ssh -t elemedev@testing'
 alias sshdev='ssh -t root@112.124.30.49'
 
+# Openapi Doc.
+alias cdop='cd ~/workspace/eleme/openapi-doc/'
+
 # Walle.
 alias cdw='cd ~/workspace/eleme/walle/'
 alias cdwlm='cd ~/workspace/eleme/walle/lib/model/'
