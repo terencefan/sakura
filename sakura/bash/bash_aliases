@@ -9,6 +9,7 @@ alias cdsa='cd ~/workspace/sakura/'
 # --------------
 alias sshed='ssh -t elemedev@192.168.108.120'
 alias sshet='ssh -t elemedev@testing'
+alias sshdev='ssh -t root@112.124.30.49
 
 # Walle.
 alias cdw='cd ~/workspace/eleme/walle/'
@@ -44,5 +45,6 @@ alias zuh='zhelper eus'
 alias cde='cd ~/workspace/eleme/earthshaker/'
 alias cdee='cd ~/workspace/eleme/earthshaker/earthshaker/'
 alias cdeev='cd ~/workspace/eleme/earthshaker/earthshaker/views/'
+alias cdet='cd ~/workspace/eleme/earthshaker/test/'
 alias cdeth='cd ~/workspace/eleme/earthshaker/test/http/'
 # -------------
