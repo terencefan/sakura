@@ -1,5 +1,8 @@
 alias tmux='tmux -2'
 
+alias la='ls -a'
+alias ll='ls -la'
+
 alias redis-server='redis-server /usr/local/etc/redis.conf'
 
 alias cdin='cd ~/workspace/inori/'
@@ -9,7 +12,7 @@ alias cdsa='cd ~/workspace/sakura/'
 # --------------
 alias sshed='ssh -t elemedev@192.168.108.120'
 alias sshet='ssh -t elemedev@testing'
-alias sshdev='ssh -t root@112.124.30.49
+alias sshdev='ssh -t root@112.124.30.49'
 
 # Walle.
 alias cdw='cd ~/workspace/eleme/walle/'

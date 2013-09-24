@@ -20,7 +20,11 @@ VERSION_NAME = {
     '10.04': 'lucid',
 }
 
-env.hosts = ['elemedev@192.168.108.120', 'elemedev@testing']
+env.hosts = [
+    'elemedev@192.168.108.120',
+#    'elemedev@testing',
+    'root@112.124.30.49'
+]
 
 
 def backup(file_path, exc=False):
