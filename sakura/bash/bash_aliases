@@ -5,10 +5,10 @@ alias ll='ls -la'
 
 alias redis-server='redis-server /usr/local/etc/redis.conf'
 
+alias pweb='python -m SimpleHTTPServer'
+
 alias cdin='cd ~/workspace/inori/'
 alias cdsa='cd ~/workspace/sakura/'
-
-alias pweb='python -m SimpleHTTPServer'
 
 # Eleme aliases.
 # --------------
