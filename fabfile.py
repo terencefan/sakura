@@ -22,7 +22,7 @@ VERSION_NAME = {
 
 env.hosts = [
     'elemedev@192.168.108.120',
-#    'elemedev@testing',
+    #'elemedev@testing',
     'root@112.124.30.49'
 ]
 
