@@ -143,6 +143,8 @@ def vim():
         "~/.vim/bundle/vim-colors-solarized",
         "https://github.com/flazz/vim-colorschemes.git":
         "~/.vim/bundle/vim-colorschemes",
+        "https://github.com/Shougo/neocomplcache.vim.git":
+        "~/.vim/bundle/neocomplcache",
     }
 
     for dir_path in dir_paths:
