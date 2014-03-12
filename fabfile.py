@@ -58,6 +58,8 @@ def bash():
 @task
 def git():
     local('cp {} {}'.format('sakura/git/gitconfig', '~/.gitconfig'))
+    local('curl https://raw.github.com/git/git/master/contrib/completion\
+        /git-completion.bash -o ~/.git-completion.bash')
 
 
 @task
@@ -112,7 +114,7 @@ def ssh(server=False):
     # ssh localhost
     local('cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys')
 
-    local('chmoe 0600 /root/.ssh/id_rsa')
+    local('chmod 0600 /root/.ssh/id_rsa')
 
     if not server:
         return
