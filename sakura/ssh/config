@@ -15,6 +15,7 @@ Host s-*
 Host pg-misc-0
     Hostname 59.151.93.77
     User stdrickforce
+    Port 2014
     IdentityFile ~/.ssh/id_rsa
     Identitiesonly yes
     ControlMaster no
@@ -22,9 +23,38 @@ Host pg-misc-0
 
 Host p-*
     User stdrickforce
+    Port 2014
     Identitiesonly yes
     UserKnownHostsFile ~/.ssh/known_hosts
     ProxyCommand ssh pg-misc-0 nc %h %p
+    Compression yes
+
+Host testing
+    Hostname 172.16.10.11
+    Port 2014
+    User stdrickforce
+    IdentityFile ~/.ssh/id_rsa
+    Compression yes
+
+Host t-service-1
+    Hostname 172.16.10.12
+    Port 2014
+    User stdrickforce
+    IdentityFile ~/.ssh/id_rsa
+    Compression yes
+
+Host t-web-1
+    Hostname 172.16.10.13
+    Port 2014
+    User stdrickforce
+    IdentityFile ~/.ssh/id_rsa
+    Compression yes
+
+Host inori
+    Hostname 115.29.234.212
+    User root
+    Port 22
+    IdentityFile ~/.ssh/inori_rsa
     Compression yes
 
 Host s-web-0
@@ -40,10 +70,10 @@ Host s-mysql-0
     Hostname 54.238.185.87
 
 Host s-service-0
-    Hostname 54.238.185.121
+    Hostname 54.199.155.205
 
 Host s-service-1
-    Hostname 54.238.191.220
+    Hostname 54.199.150.123
 
 Host s-es-0
     Hostname 54.238.189.146
@@ -66,6 +96,15 @@ Host p-web-3
 Host p-web-4
     Hostname 192.168.1.14
 
+Host p-web-5
+    Hostname 192.168.1.20
+
+Host p-web-6
+    Hostname 192.168.1.23
+
+Host p-paladin-1
+    Hostname 192.168.1.167
+
 Host p-mysql-0
     Hostname 192.168.1.30
 
@@ -84,6 +123,12 @@ Host p-mysql-4
 Host p-mysql-5
     Hostname 192.168.1.48
 
+Host p-mysql-6
+    Hostname 192.168.1.50
+
+Host p-mysql-7
+    Hostname 192.168.1.52
+
 Host p-cache-0
     Hostname 192.168.1.60
 
@@ -93,6 +138,9 @@ Host p-cache-1
 Host p-cache-2
     Hostname 192.168.1.64
 
+Host p-cache-3
+    Hostname 192.168.1.66
+
 Host p-service-0
     Hostname 192.168.1.80
 
@@ -101,6 +149,24 @@ Host p-service-1
 
 Host p-service-2
     Hostname 192.168.1.84
+
+Host p-service-3
+    Hostname 192.168.1.46
+
+Host p-service-4
+    Hostname 192.168.1.87
+
+Host p-service-5
+    Hostname 192.168.1.90
+
+Host p-service-6
+    Hostname 192.168.1.91
+
+Host p-service-7
+    Hostname 192.168.1.93
+
+Host p-service-8
+    Hostname 192.168.1.95
 
 Host p-es-0
     Hostname 192.168.1.150
@@ -113,3 +179,7 @@ Host p-lb-0
 
 Host p-lb-1
     Hostname 192.168.1.121
+
+Host *
+    ForwardAgent yes
+    ServerAliveInterval 120
