@@ -147,6 +147,10 @@ function man() {
             man "$@"
 }
 
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
 # auto verify add config git user name and email
 function git_user_verify() {
     if [[ -d ".git" ]]; then
