@@ -172,6 +172,8 @@ map <Leader>= <C-w>=
 " Remap VIM 0
 map 0 ^
 
+inoremap jk <Esc>
+
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
@@ -423,8 +425,11 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     endif
 
 " Syntastic
-    let g:syntastic_check_on_open=1
+    execute pathogen#infect()
+
     let g:syntastic_auto_jump=1
+    let g:syntastic_check_on_open=1
+    let g:syntastic_python_checkers = ['flake8']
 
 " Powerline
     let g:Powerline_symbols = 'fancy'
