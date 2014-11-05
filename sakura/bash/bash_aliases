@@ -7,17 +7,21 @@ alias redis-server='redis-server /usr/local/etc/redis.conf'
 
 alias pweb='python -m SimpleHTTPServer'
 
+alias goagent='sudo python /Applications/goagent/local/proxy.py'
+
 alias cdin='cd ~/workspace/inori/'
+alias cdko='cd ~/workspace/kotoba/'
 alias cdsa='cd ~/workspace/sakura/'
+
+
+alias cdinm='cd ~/workspace/inori/inori/models/'
+alias cdinv='cd ~/workspace/inori/inori/views/'
+alias cdint='cd ~/workspace/inori/inori/templates/'
 
 # Eleme aliases.
 # --------------
-alias sshed='ssh -t elemedev@192.168.108.120'
-alias sshet='ssh -t elemedev@testing'
-alias sshdev='ssh -t root@112.124.30.49'
-
-# Openapi Doc.
-alias cdop='cd ~/workspace/eleme/openapi-doc/'
+alias sshed='ssh elemedev'
+alias sshin='ssh inori'
 
 # Walle.
 alias cdw='cd ~/workspace/eleme/walle/'
@@ -25,6 +29,23 @@ alias cdwlm='cd ~/workspace/eleme/walle/lib/model/'
 alias cdwlz='cd ~/workspace/eleme/walle/lib/Zeus/'
 alias cdwm='cd ~/workspace/eleme/walle/apps/walle/modules/'
 alias cdwjs='cd ~/workspace/eleme/walle/web/walle/js/walle/'
+
+# Mintaka.
+alias cdm='cd ~/workspace/eleme/mintaka/'
+
+# Paladin.
+alias cdp='cd ~/workspace/eleme/paladin/'
+alias cdpt='cd ~/workspace/eleme/paladin/paladin/templates'
+alias cdpm='cd ~/workspace/eleme/paladin/paladin/models'
+alias cdpv='cd ~/workspace/eleme/paladin/paladin/views'
+alias cdpu='cd ~/workspace/eleme/paladin/paladin/utils'
+alias cdps='cd ~/workspace/eleme/paladin/paladin/static'
+
+# Coffee.
+alias cdc='cd ~/workspace/eleme/coffee/'
+alias cdch='cd ~/workspace/eleme/coffee/coffee/hr/'
+alias cdcw='cd ~/workspace/eleme/coffee/coffee/wf/'
+alias cdca='cd ~/workspace/eleme/coffee/coffee/webapi/'
 
 # Zeus2.
 alias cdz='cd ~/workspace/eleme/zeus2/'
@@ -56,3 +77,18 @@ alias cdeev='cd ~/workspace/eleme/earthshaker/earthshaker/views/'
 alias cdet='cd ~/workspace/eleme/earthshaker/test/'
 alias cdeth='cd ~/workspace/eleme/earthshaker/test/http/'
 # -------------
+
+# Openapi.
+alias cdo='cd ~/workspace/eleme/prophet/'
+alias cdoo='cd ~/workspace/eleme/prophet/prophet/'
+alias cdoov='cd ~/workspace/eleme/prophet/prophet/views/'
+alias cdot='cd ~/workspace/eleme/prophet/test/'
+alias cdoth='cd ~/workspace/eleme/prophet/test/http/'
+
+# Priest
+alias cdr='cd ~/workspace/eleme/priest/'
+alias cdrr='cd ~/workspace/eleme/priest/priest/'
+alias cdrrv='cd ~/workspace/eleme/priest/priest/views/'
+alias cdrrm='cd ~/workspace/eleme/priest/priest/models/'
+
+alias scpm='scp p-service-2:~/export_active_user.xls /Users/stdrickforce/Documents/'
