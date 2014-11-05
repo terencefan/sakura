@@ -114,7 +114,7 @@ def ssh(server=False):
     # ssh localhost
     local('cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys')
 
-    local('chmod 0600 /root/.ssh/id_rsa')
+    local('chmod 0600 ~/.ssh/id_rsa')
 
     if not server:
         return
