@@ -58,25 +58,14 @@ def bash():
 @task
 def git():
     local('cp {} {}'.format('sakura/git/gitconfig', '~/.gitconfig'))
-    local('curl https://raw.github.com/git/git/master/contrib/completion\
-        /git-completion.bash -o ~/.git-completion.bash')
+    local('curl https://raw.githubusercontent.com/git/git/master/\
+        contrib/completion/git-completion.bash -o ~/.git-completion.bash')
 
 
 @task
 def hosts():
     local('cp {} {}'.format('sakura/hosts/hosts', '/etc/hosts'))
     # local('/etc/init.d/networking restart')
-
-
-# For Ubuntu Only
-@task
-def install():
-    require_apts = ['git', 'ssh', 'vim', 'vim-gnome', 'ncurses-base',
-                    'openssh-server', 'mysql-server', 'mysql-client',
-                    'libmysqlclient-dev', 'libevent-dev', 'mytop', 'gcc',
-                    'python-dev', 'zlibc', 'zlib1g-dev']
-    for apt in require_apts:
-        local('apt-get -y install {}'.format(apt))
 
 
 # For Ubuntu Only
@@ -103,34 +92,8 @@ def source():
 
 
 @task
-def ssh(server=False):
-    if not path_exists('~/.ssh/'):
-        local('mkdir ~/.ssh/')
-
-    keys = ['id_rsa', 'id_rsa.pub']
-    for key in keys:
-        local("cp sakura/ssh/{} ~/.ssh/{}".format(key, key))
-
-    # ssh localhost
-    local('cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys')
-
-    local('chmod 0600 ~/.ssh/id_rsa')
-
-    if not server:
-        return
-
-    for host in env.hosts:
-        local('scp ~/.ssh/id_rsa.pub {}:~/.ssh/authorized_keys'.format(host))
-
-
-@task
 def tmux():
     local('cp {} {}'.format('sakura/tmux/tmux.conf', '~/.tmux.conf'))
-
-
-@task
-def upgrade():
-    local('apt-get upgrade')
 
 
 @task
@@ -160,20 +123,3 @@ def vim():
         local('git clone {} {}'.format(url, path))
 
     local('cp sakura/vim/vimrc ~/.vimrc')
-
-
-@task
-def build():
-    # source & install must be in the beginning of the command list
-    # execute(source)
-    execute(install)
-
-    # update configs
-    execute(git)
-    execute(hosts)
-    execute(ssh)
-    execute(tmux)
-    execute(vim)
-
-    # bash must be in the end of the command list
-    execute(bash)
