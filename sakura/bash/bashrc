@@ -44,9 +44,6 @@ export CLICOLOR=1
 
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-# for django
-export DJANGO_SETTINGS_MODULE=settings
-
 # for rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 

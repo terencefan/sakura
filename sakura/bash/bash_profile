@@ -16,4 +16,23 @@ LESSOPEN="| /usr/local/bin/src-hilite-lesspipe.sh %s"
 LESS=' -R '
 export LESSOPEN LESS
 
-export DJANGO_SETTINGS_MODULE='config.settings'
+#
+# Qu Jing iTerm & Terminal Setup Script
+# version 0.3
+# Felix Ding
+# July 12, 2014 @Costa
+#
+function start_qujing {
+  export http_proxy='theironislands.f.getqujing.net:36779'
+  export HTTPS_PROXY='theironislands.f.getqujing.net:36779'
+}
+#
+# Qu Jing iTerm & Terminal Setup Script
+# version 0.3
+# Felix Ding
+# July 12, 2014 @Costa
+#
+function start_qujing {
+  export http_proxy='theironislands.f.getqujing.net:36779'
+  export HTTPS_PROXY='theironislands.f.getqujing.net:36779'
+}

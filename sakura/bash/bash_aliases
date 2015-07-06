@@ -9,46 +9,52 @@ alias pweb='python -m SimpleHTTPServer'
 
 alias goagent='sudo python /Applications/goagent/local/proxy.py'
 
+alias pit='proxychains4 git'
+
+alias ssh_proxy_19999='ssh -qTnN -L 19999:localhost:19999 p-web-5'
+
+alias cdpc='cd /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/'
+
 alias cdin='cd ~/workspace/inori/'
 alias cdko='cd ~/workspace/kotoba/'
 alias cdsa='cd ~/workspace/sakura/'
-
 
 alias cdinm='cd ~/workspace/inori/inori/models/'
 alias cdinv='cd ~/workspace/inori/inori/views/'
 alias cdint='cd ~/workspace/inori/inori/templates/'
 
-# Eleme aliases.
-# --------------
-alias sshed='ssh elemedev'
-alias sshin='ssh inori'
+# Azeroth.
+alias sva='source /srv/virtualenvs/azerothenv/bin/activate'
+alias cda='cd ~/workspace/azeroth'
 
-# Walle.
-alias cdw='cd ~/workspace/eleme/walle/'
-alias cdwlm='cd ~/workspace/eleme/walle/lib/model/'
-alias cdwlz='cd ~/workspace/eleme/walle/lib/Zeus/'
-alias cdwm='cd ~/workspace/eleme/walle/apps/walle/modules/'
-alias cdwjs='cd ~/workspace/eleme/walle/web/walle/js/walle/'
-
-# Mintaka.
-alias cdm='cd ~/workspace/eleme/mintaka/'
+# Draenor.
+alias svd='source /srv/virtualenvs/draenorenv/bin/activate'
+alias cdd='cd ~/workspace/eleme/draenor/'
+alias cddc='cd ~/workspace/eleme/draenor/draenor/core/'
+alias cddr='cd ~/workspace/eleme/draenor/draenor/rpc/'
+alias cddu='cd ~/workspace/eleme/draenor/draenor/dus/'
+alias cdds='cd ~/workspace/eleme/draenor/draenor/dss/'
+alias cddo='cd ~/workspace/eleme/draenor/draenor/dos/'
+alias cddd='cd ~/workspace/eleme/draenor/draenor/dds/'
+alias cddh='cd ~/workspace/eleme/draenor/draenor/hrs/'
 
 # Paladin.
+alias pst='ssh -qTnN -L 9980:localhost:9980 p-web-5'
+alias svp='source /srv/virtualenvs/paladinenv/bin/activate'
 alias cdp='cd ~/workspace/eleme/paladin/'
-alias cdpt='cd ~/workspace/eleme/paladin/paladin/templates'
+alias cdpa='cd ~/workspace/eleme/paladin/paladin/apps'
+alias cdpd='cd ~/workspace/eleme/paladin/paladin/dal'
 alias cdpm='cd ~/workspace/eleme/paladin/paladin/models'
-alias cdpv='cd ~/workspace/eleme/paladin/paladin/views'
 alias cdpu='cd ~/workspace/eleme/paladin/paladin/utils'
 alias cdps='cd ~/workspace/eleme/paladin/paladin/static'
 
-# Coffee.
-alias cdc='cd ~/workspace/eleme/coffee/'
-alias cdch='cd ~/workspace/eleme/coffee/coffee/hr/'
-alias cdcw='cd ~/workspace/eleme/coffee/coffee/wf/'
-alias cdca='cd ~/workspace/eleme/coffee/coffee/webapi/'
+# Turalyon.
+alias cdt='cd ~/workspace/eleme/turalyon/'
 
 # Zeus2.
+alias svz='source /srv/virtualenvs/zeusenv/bin/activate'
 alias cdz='cd ~/workspace/eleme/zeus2/'
+alias cdzc='cd ~/workspace/eleme/zeus_core/zeus_core/'
 alias cdza='cd ~/workspace/eleme/zeus2/zeus/oas/'
 alias cdzo='cd ~/workspace/eleme/zeus2/zeus/eos/'
 alias cdzr='cd ~/workspace/eleme/zeus2/zeus/ers/'
@@ -77,18 +83,5 @@ alias cdeev='cd ~/workspace/eleme/earthshaker/earthshaker/views/'
 alias cdet='cd ~/workspace/eleme/earthshaker/test/'
 alias cdeth='cd ~/workspace/eleme/earthshaker/test/http/'
 # -------------
-
-# Openapi.
-alias cdo='cd ~/workspace/eleme/prophet/'
-alias cdoo='cd ~/workspace/eleme/prophet/prophet/'
-alias cdoov='cd ~/workspace/eleme/prophet/prophet/views/'
-alias cdot='cd ~/workspace/eleme/prophet/test/'
-alias cdoth='cd ~/workspace/eleme/prophet/test/http/'
-
-# Priest
-alias cdr='cd ~/workspace/eleme/priest/'
-alias cdrr='cd ~/workspace/eleme/priest/priest/'
-alias cdrrv='cd ~/workspace/eleme/priest/priest/views/'
-alias cdrrm='cd ~/workspace/eleme/priest/priest/models/'
 
 alias scpm='scp p-service-2:~/export_active_user.xls /Users/stdrickforce/Documents/'
