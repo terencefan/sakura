@@ -30,6 +30,12 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# bash prompt
+if [ -f ~/.bash_prompt ]; then
+    . ~/.bash_prompt
+fi
+
+
 ##########
 # export env
 ##########
@@ -46,9 +52,6 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # for rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-# bash prompt
-source ~/.bash_prompt
 
 ##########
 # homebrew related
@@ -77,14 +80,6 @@ fi
 if [[ -d "$HOME/bin" ]]; then
     export PATH=$HOME/bin:$PATH
 fi
-
-# use autoenv to autoload project virtualenv
-if [[ -f "/usr/local/bin/activate.sh" ]]; then
-    source "/usr/local/bin/activate.sh"
-elif [[ -d "$HOME/.autoenv" ]]; then
-    source "$HOME/.autoenv/activate.sh"
-fi
-
 
 ##########
 # virtualenv related
@@ -144,6 +139,10 @@ function man() {
             man "$@"
 }
 
+#####################
+# Git Completion
+#####################
+
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
@@ -175,13 +174,9 @@ function git_user_verify() {
 
 function cd() {
     if builtin cd "$@"; then
-        autoenv_init
         git_user_verify
         return 0
     else
         return $?
     fi
 }
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-export PYTHONPATH=$PYTHONPATH:"/home/elemedev/workspace/zeus"
