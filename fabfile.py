@@ -76,7 +76,6 @@ def tmux():
 @task
 def vim():
     dir_paths = ['~/.vim/', '~/.vim/backup/', '~/.vim/undo']
-    '''
     repositories = {
         "https://github.com/gmarik/vundle.git":
         "~/.vim/bundle/vundle",
@@ -89,19 +88,16 @@ def vim():
         "https://github.com/Shougo/neocomplcache.vim.git":
         "~/.vim/bundle/neocomplcache",
     }
-    '''
 
     for dir_path in dir_paths:
         if path_exists(dir_path):
             continue
         local('mkdir {}'.format(dir_path))
 
-    '''
     for url, path in repositories.iteritems():
         if path_exists(path):
             continue
         local('git clone {} {}'.format(url, path))
-    '''
 
     local('cp sakura/vim/vimrc ~/.vimrc')
 
