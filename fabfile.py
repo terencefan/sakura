@@ -68,29 +68,6 @@ def hosts():
     # local('/etc/init.d/networking restart')
 
 
-# For Ubuntu Only
-@task
-def source():
-    content = local('lsb_release -a', capture=True)
-    key_val_list = [a.split(':') for a in content.split('\n')]
-    params = {b[0]: b[1].strip() for b in key_val_list}
-    version = params.get('Release')
-
-    version_name = VERSION_NAME[version]
-    input_file_path = 'sakura/source/source-{}.list'.format(SOURCE_TYPE)
-    output_file_path = '/etc/apt/sources.list'
-
-    input_file = open(input_file_path, 'r')
-    output_file = open(output_file_path, 'w')
-    backup(output_file_path)
-    output_file.write(input_file.read().replace('{}', version_name))
-
-    input_file.close()
-    output_file.close()
-
-    local('apt-get update')
-
-
 @task
 def tmux():
     local('cp {} {}'.format('sakura/tmux/tmux.conf', '~/.tmux.conf'))
@@ -99,6 +76,7 @@ def tmux():
 @task
 def vim():
     dir_paths = ['~/.vim/', '~/.vim/backup/', '~/.vim/undo']
+    '''
     repositories = {
         "https://github.com/gmarik/vundle.git":
         "~/.vim/bundle/vundle",
@@ -111,15 +89,32 @@ def vim():
         "https://github.com/Shougo/neocomplcache.vim.git":
         "~/.vim/bundle/neocomplcache",
     }
+    '''
 
     for dir_path in dir_paths:
         if path_exists(dir_path):
             continue
         local('mkdir {}'.format(dir_path))
 
+    '''
     for url, path in repositories.iteritems():
         if path_exists(path):
             continue
         local('git clone {} {}'.format(url, path))
+    '''
 
     local('cp sakura/vim/vimrc ~/.vimrc')
+
+
+@task
+def collect():
+
+    ps = [
+        ('~/.vimrc', 'sakura/vim/vimrc'),
+        ('~/.bashrc', 'sakura/bash/bashrc'),
+        ('~/.bash_prompt', 'sakura/bash/bash_prompt'),
+        ('~/.bash_aliases', 'sakura/bash/bash_aliases'),
+    ]
+
+    for (p1, p2) in ps:
+        local('cp {} {}'.format(p1, p2))
