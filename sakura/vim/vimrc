@@ -64,8 +64,8 @@ set undodir=~/.vim/undo
 " When vimrc is edited, reload it
 autocmd! BufWritePost ~/.vimrc source ~/.vimrc
 
-" Since I use linux, I want this
-let g:clipbrdDefaultReg='+'
+" set clipboard
+set clipboard+=unnamed
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -396,11 +396,18 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
 
     let g:syntastic_auto_jump=1
     let g:syntastic_check_on_open=1
-    let g:syntastic_python_checkers = ['flake8']
-    " let g:syntastic_python_flake8_args = '--ignore=E265,F401,F403'
-    let g:syntastic_python_flake8_args = '--ignore=E265,F403'
 
-    " let g:syntastic_ignore_files = [".*\.py$"]
+    let g:syntastic_python_checkers = ['flake8']
+    let g:syntastic_python_flake8_args = '--ignore=E265,F403,E501'
+
+    let g:syntastic_php_checkers = ['php']
+
+    let g:syntastic_javascript_checkers = ['jshint']
+
+    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
+    let g:syntastic_ignore_files = [".*\.html$"]
 
 " Powerline
     let g:Powerline_symbols = 'fancy'
@@ -412,23 +419,25 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Languages
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Indent Fixes
-    autocmd FileType css,less,javascript,php,puppet,yaml set shiftwidth=2
-    autocmd FileType css,less,javascript,php,puppet,yaml set tabstop=2
-    autocmd FileType css,less,javascript,php,puppet,yaml set softtabstop=2
+    autocmd FileType css,less,javascript,php,yaml,jedi set shiftwidth=2
+    autocmd FileType css,less,javascript,php,yaml,jedi set tabstop=2
+    autocmd FileType css,less,javascript,php,yaml,jedi set softtabstop=2
+    autocmd FileType css,less,javascript,php,yaml,jedi setlocal noexpandtab nolist cc=120
 
 " Python
     " Highlight 80 column
-    autocmd FileType python set cc=80
+    autocmd FileType python setlocal cc=80
 
 " Less
     autocmd BufRead,BufNewFile *.less set filetype=less
 
+" Jedi
+    autocmd BufRead,BufNewFile *.jedi set filetype=jedi
+
 " Thrift
     autocmd BufRead,BufNewFile *.thrift set filetype=thrift
-
-" Puppet
-    autocmd BufRead,BufNewFile *.pp set filetype=puppet
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Funtion define
@@ -510,8 +519,20 @@ augroup JumpCursorOnEdit
 augroup END
 
 
+" python fold
+set foldmethod=indent
+
+
+" Golang
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+
 " Auto add .py header.
-function PyHeader()
+function! PyHeader()
 
     let n = 1
     while n < 3
@@ -525,26 +546,50 @@ function PyHeader()
     call append(0, '#!/usr/bin/env python')
     call append(1, '# -*- coding: utf-8 -*-')
     call append(2, '')
-    call append(3, '# Created At: '.strftime("%c"))
-    call append(4, '# Updated At: '.strftime("%c"))
+    call append(3, '__author__ = "stdrickforce"  # Tengyuan Fan')
+    call append(4, '# Email: <stdrickforce@gmail.com> <tfan@xingin.com>')
     call append(5, '')
-    call append(6, '__author__ = "stdrickforce"  # Tengyuan Fan')
-    call append(7, '# Email: <stdrickforce@gmail.com> <tfan@xingin.com>')
-    call append(8, '')
     echohl WarningMsg | echo "Successful in adding the header." | echohl None
 endf
 
-function UpdatePyHeader()
-    let n = 1
-    while n < 6
-        let line = getline(n)
-        if line =~ '\S*Updated\S*'
-            call setline(n, '# Updated At: '.strftime("%c"))
-            return
-        endif
-        let n = n + 1
-    endwhile
+" Auto compile .cpp file.
+function! CompileCpp()
+    exec "w"
+    exec "cclose"
+    if &filetype == 'cpp'
+        set makeprg=g++\ -o\ %<\ %
+    endif
+    silent make
+    exec "normal :"
+
+    let myfile=expand("%:r")
+    if filereadable(myfile)
+        execute "! ./%< && rm ./%<"
+    else
+        cope5
+    endif
 endf
 
+" Auto compile .java file.
+function! CompileJava()
+    exec "w"
+    exec "!javac %"
+    exec "!java %<"
+endf
+
+function! Run()
+    if &filetype == 'python'
+        exec "!pypy %"
+    elseif &filetype == 'php'
+        exec "!php %"
+    elseif &filetype == 'cpp'
+        call CompileCpp()
+    elseif &filetype == 'java'
+        call CompileJava()
+    endif
+endf
+
+nnoremap cc :call Compile()<CR>
+nnoremap rr :call Run()<CR>
+
 au bufnewfile,bufread *.py call PyHeader()
-au bufwritepost *.py call UpdatePyHeader()
