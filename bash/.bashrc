@@ -25,7 +25,7 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# bash-completion for linux
+# bash-aliases for linux
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -47,8 +47,6 @@ export LC_ALL=en_US.UTF-8
 
 export EDITOR=vim
 export CLICOLOR=1
-
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # for rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
@@ -84,51 +82,39 @@ function man() {
             man "$@"
 }
 
-#####################
-# Git Completion
-#####################
-
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
-fi
-
 # auto verify add config git user name and email
-function git_user_verify() {
-    if [[ -d ".git" ]]; then
-        if ! git config --get user.name 1>/dev/null; then
-            echo -n "Git user.name not configured, please enter your name: "
-            read name
-            if [[ -n $name ]]; then
-                git config user.name $name
-            else
-                echo "name empty, not configured."
-            fi
-        fi
+# function git_user_verify() {
+#     if [[ -d ".git" ]]; then
+#         if ! git config --get user.name 1>/dev/null; then
+#             echo -n "Git user.name not configured, please enter your name: "
+#             read name
+#             if [[ -n $name ]]; then
+#                 git config user.name $name
+#             else
+#                 echo "name empty, not configured."
+#             fi
+#         fi
+#
+#         if ! git config --get user.email 1>/dev/null; then
+#             echo -n "Git user.email not configured, please enter your email: "
+#             read email
+#             if [[ -n $email ]]; then
+#                 git config user.email $email
+#             else
+#                 echo "email empty, not configured."
+#             fi
+#         fi
+#     fi
+# }
+#
+# function cd() {
+#     if builtin cd "$@"; then
+#         git_user_verify
+#         return 0
+#     else
+#         return $?
+#     fi
+# }
 
-        if ! git config --get user.email 1>/dev/null; then
-            echo -n "Git user.email not configured, please enter your email: "
-            read email
-            if [[ -n $email ]]; then
-                git config user.email $email
-            else
-                echo "email empty, not configured."
-            fi
-        fi
-    fi
-}
-
-function cd() {
-    if builtin cd "$@"; then
-        git_user_verify
-        return 0
-    else
-        return $?
-    fi
-}
-
-# nvm
-export NVM_DIR=~/.vim
-source /usr/local/opt/nvm/nvm.sh
-
-# php-version
-source $(brew --prefix php-version)/php-version.sh && php-version 5
+# auto-select php-version to 5.5
+source $(brew --prefix php-version)/php-version.sh && php-version 5.5

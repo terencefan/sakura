@@ -1,4 +1,5 @@
 alias tmux='tmux -2'
+alias vi='/usr/local/bin/vim'
 
 alias rb='source ~/.bashrc'
 
@@ -47,6 +48,6 @@ alias cdh='cd ~/workspace/baixing/haojing/'
 alias hpu='~/workspace/baixing/haojing/unittest/vendor/bin/phpunit -c ~/workspace/baixing/haojing/unittest/phpunit.xml'
 
 # baixing
-alias rshj='rsync -hlrtuP --del --exclude-from ~/tmp/rsync_ignore ~/workspace/baixing/haojing/ haojing:~/haojing/'
-alias rslkk='rsync -hlrtuP --del --exclude-from ~/tmp/rsync_ignore ~/workspace/baixing/OrosOlymPos/ lkk:~/lkk/'
-alias rsp='rsync -hlrtuP --del --exclude-from ~/tmp/rsync_ignore ~/workspace/baixing/pigeon/ pigeon-s:/srv/pigeon/'
+alias rshj='rsync -hlrtuP --del --exclude-from ~/.rsync_ignore ~/workspace/baixing/haojing/ haojing:~/haojing/'
+alias rslkk='rsync -hlrtuP --del --exclude-from ~/.rsync_ignore ~/workspace/baixing/OrosOlymPos/ lkk:~/lkk/'
+alias rsp='rsync -hlrtuP --del --exclude-from ~/.rsync_ignore ~/workspace/baixing/pigeon/ pigeon-s:/srv/pigeon/'

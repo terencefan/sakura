@@ -9,29 +9,33 @@ Bundle "gmarik/vundle"
 
 " Enable plugins
 Bundle 'Lokaltog/vim-powerline'
-" Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'Shougo/neocomplcache'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'flazz/vim-colorschemes'
-" "Bundle 'garbas/vim-snipmate'
+Bundle 'Shougo/neocomplete'
+Bundle 'StanAngeloff/php.vim'
 Bundle 'godlygeek/tabular'
-" Bundle 'groenewege/vim-less'
-" Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
-" Bundle 'puppetlabs/puppet-syntax-vim'
-" Bundle 'rstacruz/sparkup'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'solarnz/thrift.vim'
-" Bundle 'tomtom/tlib_vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'vim-scripts/nginx.vim'
+
+" Color Schemes
+Bundle 'flazz/vim-colorschemes'
+Bundle 'altercation/vim-colors-solarized'
+
+" Bundle 'MarcWeber/vim-addon-mw-utils'
+" "Bundle 'garbas/vim-snipmate'
+" Bundle 'groenewege/vim-less'
+" Bundle 'jistr/vim-nerdtree-tabs'
+" Bundle 'puppetlabs/puppet-syntax-vim'
+" Bundle 'rstacruz/sparkup'
+" Bundle 'tomtom/tlib_vim'
 " Bundle 'tpope/vim-markdown'
 " Bundle 'tpope/vim-rails'
 " Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/nginx.vim'
 " Bundle 'vim-scripts/AutoClose'
 
 
@@ -134,9 +138,9 @@ set autoindent      " Auto indent
 set smartindent     " Smart indet
 set expandtab       " tabs are spaces, not tabs
 set smarttab        " Smart tab
-set shiftwidth=4    " use indents of 4 spaces
-set tabstop=4       " an indentation every four columns
-set softtabstop=4   " let backspace delete indent
+set shiftwidth=2    " use indents of 4 spaces
+set tabstop=2       " an indentation every four columns
+set softtabstop=2   " let backspace delete indent
 " Remove trailing whitespaces and ^M chars
 "autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
@@ -168,22 +172,16 @@ nnoremap <right> :bn!<cr>
 nnoremap <left> :bp!<cr>
 
 " Tab
-noremap gn :tabnew<space>
+noremap gt :tabnew<space>
 noremap gj :tabprevious<cr>
 noremap gk :tabnext<cr>
-noremap gc :tabclose<cr>
+noremap gw :tabclose<cr>
 
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
 
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" In visual mode when you press * or # to search for the current selection
-" "vnoremap <silent> * :call VisualSearch('f')<CR>
-" "vnoremap <silent> # :call VisualSearch('b')<CR>
-" When you press gv you vimgrep after the selected text
-" "vnoremap <silent> gv :call VisualSearch('gv')<CR>
 
 " Close the current buffer
 map <leader>d :Bclose<cr>
@@ -238,30 +236,6 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     let g:NERDShutUp=1
     let b:match_ignorecase = 1
 
-" OmniComplete
-    if has("autocmd") && exists("+omnifunc")
-        autocmd Filetype *
-            \if &omnifunc == "" |
-            \setlocal omnifunc=syntaxcomplete#Complete |
-            \endif
-    endif
-
-    hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
-    hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
-    hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
-
-    " some convenient mappings
-    inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-    inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-    inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-    inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-    inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-    inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
-
-    " automatically open and close the popup menu / preview window
-    au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-    set completeopt=menu,preview,longest
-
 " Ctags
     set tags=./tags;/,~/.vimtags
 
@@ -278,42 +252,25 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     let NERDTreeKeepTreeInNewTab=1
 
 " Tabularize {
-    if exists(":Tabularize")
-      nmap <leader>a= :Tabularize /=<CR>
-      vmap <leader>a= :Tabularize /=<CR>
-      nmap <leader>a: :Tabularize /:<CR>
-      vmap <leader>a: :Tabularize /:<CR>
-      nmap <leader>a:: :Tabularize /:\zs<CR>
-      vmap <leader>a:: :Tabularize /:\zs<CR>
-      nmap <leader>a, :Tabularize /,<CR>
-      vmap <leader>a, :Tabularize /,<CR>
-      nmap <leader>a<Bar> :Tabularize /<Bar><CR>
-      vmap <leader>a<Bar> :Tabularize /<Bar><CR>
+function! InitTabularize()
+    nmap <leader>a= :Tabularize /=<CR>
+    vmap <leader>a= :Tabularize /=<CR>
+    nmap <leader>a: :Tabularize /:<CR>
+    vmap <leader>a: :Tabularize /:<CR>
+    nmap <leader>a:: :Tabularize /:\zs<CR>
+    vmap <leader>a:: :Tabularize /:\zs<CR>
+    nmap <leader>a, :Tabularize /,<CR>
+    vmap <leader>a, :Tabularize /,<CR>
+    nmap <leader>a<Bar> :Tabularize /<Bar><CR>
+    vmap <leader>a<Bar> :Tabularize /<Bar><CR>
+endf
 
-      " The following function automatically aligns when typing a
-      " supported character
-      inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
-
-      function! s:align()
-          let p = '^\s*|\s.*\s|\s*$'
-          if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-              let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-              let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-              Tabularize/|/l1
-              normal! 0
-              call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-          endif
-      endfunction
-
-    endif
+autocmd VimEnter * :call InitTabularize()
 
 " Session List
     set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
     nmap <leader>sl :SessionList<CR>
     nmap <leader>ss :SessionSave<CR>
-
-" JSON
-    nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
 
 " Ctrlp
     let g:ctrlp_working_path_mode = 'rc'
@@ -335,39 +292,59 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     nnoremap <silent> <leader>gl :Glog<CR>
     nnoremap <silent> <leader>gp :Git push<CR>
 
-" Neocomplcache
+" Neocomplete
+
+    " Disable AutoComplPop.
     let g:acp_enableAtStartup = 0
-    let g:neocomplcache_enable_at_startup = 1
-    let g:neocomplcache_enable_camel_case_completion = 1
-    let g:neocomplcache_enable_smart_case = 1
-    let g:neocomplcache_enable_underbar_completion = 1
-    let g:neocomplcache_min_syntax_length = 3
-    let g:neocomplcache_enable_auto_delimiter = 1
+    " Use neocomplete.
+    let g:neocomplete#enable_at_startup = 1
+    " Use smartcase.
+    let g:neocomplete#enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplete#sources#syntax#min_keyword_length = 3
+    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-    " AutoComplPop like behavior.
-    let g:neocomplcache_enable_auto_select = 0
+    " Define dictionary.
+    let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+            \ }
 
-    " SuperTab like snippets behavior.
-    "imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+    " Define keyword.
+    if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+    endif
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
     " Plugin key-mappings.
-    "imap <C-k> <Plug>(neocomplcache_snippets_expand)
-    "smap <C-k> <Plug>(neocomplcache_snippets_expand)
-    inoremap <expr><C-g> neocomplcache#undo_completion()
-    inoremap <expr><C-l> neocomplcache#complete_common_string()
+    inoremap <expr><C-g>     neocomplete#undo_completion()
+    inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-    " <CR>: close popup
-    " <s-CR>: close popup and save indent.
-    inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-    inoremap <expr><s-CR> pumvisible() ? neocomplcache#close_popup() "\<CR>" : "\<CR>"
+    " Recommended key-mappings.
+    " <CR>: close popup and save indent.
+    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    function! s:my_cr_function()
+      return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+      " For no inserting <CR> key.
+      "return pumvisible() ? "\<C-y>" : "\<CR>"
+    endfunction
     " <TAB>: completion.
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
     " <C-h>, <BS>: close popup and delete backword char.
-    " inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-    " inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-    " inoremap <expr><C-y>  neocomplcache#close_popup()
-    " inoremap <expr><C-e>  neocomplcache#cancel_popup()
+    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+    " Close popup by <Space>.
+    "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+    " AutoComplPop like behavior.
+    "let g:neocomplete#enable_auto_select = 1
+
+    " Shell like behavior(not recommended).
+    "set completeopt+=longest
+    "let g:neocomplete#enable_auto_select = 1
+    "let g:neocomplete#disable_auto_complete = 1
+    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
     " Enable omni completion.
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -377,32 +354,30 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
     " Enable heavy omni completion.
-    if !exists('g:neocomplcache_omni_patterns')
-        let g:neocomplcache_omni_patterns = {}
+    if !exists('g:neocomplete#sources#omni#input_patterns')
+      let g:neocomplete#sources#omni#input_patterns = {}
     endif
-    let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-    "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-    let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-    let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+    "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+    "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+    "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
-    " For snippet_complete marker.
-    if has('conceal')
-        set conceallevel=2 concealcursor=i
-    endif
+    " For perlomni.vim setting.
+    " https://github.com/c9s/perlomni.vim
+    let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " Syntastic
-    execute pathogen#infect()
 
     let g:syntastic_auto_jump=1
     let g:syntastic_check_on_open=1
+    let g:syntastic_ignore_files = [".*\.html$"]
 
     " python
     let g:syntastic_python_checkers = ['flake8']
-    let g:syntastic_python_flake8_args = '--ignore=E402'
+    let g:syntastic_python_flake8_args = '--ignore=E402,F404'
 
     " php
-    let g:syntastic_php_checkers = ['php']
+    let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+    let g:syntastic_php_phpmd_post_args = 'unusedcode'
 
     " javascript
     let g:syntastic_javascript_checkers = ['jshint']
@@ -411,8 +386,6 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
     let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
-    let g:syntastic_ignore_files = [".*\.html$"]
-
 " Powerline
     let g:Powerline_symbols = 'fancy'
 
@@ -420,33 +393,20 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
 " => Languages
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Indent Fixes
-    autocmd FileType css,less,javascript,php,yaml,jedi set shiftwidth=2
-    autocmd FileType css,less,javascript,php,yaml,jedi set tabstop=2
-    autocmd FileType css,less,javascript,php,yaml,jedi set softtabstop=2
-    autocmd FileType css,less,javascript,php,yaml,jedi setlocal noexpandtab nolist cc=120
-
-    autocmd FileType json set noexpandtab tabstop=4
-
-" Python
-    " Highlight 80 column
-    autocmd FileType python setlocal cc=80
-
-" Less
+" Filetypes.
     autocmd BufRead,BufNewFile *.less set filetype=less
-
-" Jedi
     autocmd BufRead,BufNewFile *.jedi set filetype=jedi
-
-" Thrift
     autocmd BufRead,BufNewFile *.thrift set filetype=thrift
-
-" Json
     autocmd BufRead,BufNewFile *.json set filetype=json
 
-" Nginx
+" Nginx Filetypes.
     autocmd BufRead,BufNewFile /etc/nginx/* set filetype=nginx
     autocmd BufRead,BufNewFile /usr/local/etc/nginx/* set filetype=nginx
+
+" Indent Fixes
+    autocmd FileType php setlocal noexpandtab nolist cc=120
+    autocmd FileType python setlocal cc=80
+    autocmd FileType json set noexpandtab tabstop=4
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Funtion define
