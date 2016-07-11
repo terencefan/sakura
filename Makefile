@@ -4,13 +4,32 @@ help:
 	@echo 'Usage:											'
 	@echo '    make collect      collect current configs    '
 	@echo '    make build        initialize current configs '
+	@echo '    make homebrew     install homebrew on osx    '
 
 git-completion:
-	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash >> ~/.git-completion.bash
+	curl -LSso ~/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 
 vim-pathogen:
 	mkdir -p ~/.vim/autoload ~/.vim/bundle
 	curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+git: git-completion
+	cp $(CURDIR)/git/.gitconfig ~/
+
+tmux:
+	cp $(CURDIR)/tmux/.tmux.conf ~/
+
+vim: vim-pathogen
+	cp $(CURDIR)/vim/.vimrc ~/
+
+bash:
+	cp $(CURDIR)/bash/.bashrc ~/
+	cp $(CURDIR)/bash/.bash_aliases ~/
+	cp $(CURDIR)/bash/.bash_prompt ~/
+	cp $(CURDIR)/bash/.bash_profile ~/
+	source ~/.bashrc
+
+build: bash git vim tmux
 
 collect:
 	# bash.
@@ -25,4 +44,3 @@ collect:
 	# vim.
 	cp ~/.vimrc $(CURDIR)/vim/
 
-build: git-completion vim-pathogen
