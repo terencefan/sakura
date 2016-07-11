@@ -397,13 +397,17 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     let g:syntastic_auto_jump=1
     let g:syntastic_check_on_open=1
 
+    " python
     let g:syntastic_python_checkers = ['flake8']
-    let g:syntastic_python_flake8_args = '--ignore=E265,F403,E501'
+    let g:syntastic_python_flake8_args = '--ignore=E402'
 
+    " php
     let g:syntastic_php_checkers = ['php']
 
+    " javascript
     let g:syntastic_javascript_checkers = ['jshint']
 
+    " golang
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
     let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
@@ -411,10 +415,6 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
 
 " Powerline
     let g:Powerline_symbols = 'fancy'
-
-" Nginx
-    autocmd BufRead,BufNewFile /etc/nginx/* set filetype=nginx
-    autocmd BufRead,BufNewFile /usr/local/etc/nginx/* set filetype=nginx
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Languages
@@ -425,6 +425,8 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     autocmd FileType css,less,javascript,php,yaml,jedi set tabstop=2
     autocmd FileType css,less,javascript,php,yaml,jedi set softtabstop=2
     autocmd FileType css,less,javascript,php,yaml,jedi setlocal noexpandtab nolist cc=120
+
+    autocmd FileType json set noexpandtab tabstop=4
 
 " Python
     " Highlight 80 column
@@ -439,9 +441,17 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
 " Thrift
     autocmd BufRead,BufNewFile *.thrift set filetype=thrift
 
+" Json
+    autocmd BufRead,BufNewFile *.json set filetype=json
+
+" Nginx
+    autocmd BufRead,BufNewFile /etc/nginx/* set filetype=nginx
+    autocmd BufRead,BufNewFile /usr/local/etc/nginx/* set filetype=nginx
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Funtion define
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Search selection
 function! VisualSearch(direction) range
     let l:saved_reg = @"
@@ -483,16 +493,6 @@ function! <SID>BufcloseCloseIt()
     endif
 endfunction
 
-" Get paste status
-function! HasPaste()
-  if &paste
-      return 'PASTE MODE  '
-  else
-      return ''
-  endif
-endfunction
-
-" Restore cursor position to where it was before
 augroup JumpCursorOnEdit
    au!
    autocmd BufReadPost *
@@ -552,6 +552,8 @@ function! PyHeader()
     echohl WarningMsg | echo "Successful in adding the header." | echohl None
 endf
 
+au bufnewfile,bufread *.py call PyHeader()
+
 " Auto compile .cpp file.
 function! CompileCpp()
     exec "w"
@@ -579,7 +581,7 @@ endf
 
 function! Run()
     if &filetype == 'python'
-        exec "!pypy %"
+        exec "!python %"
     elseif &filetype == 'php'
         exec "!php %"
     elseif &filetype == 'cpp'
@@ -591,5 +593,3 @@ endf
 
 nnoremap cc :call Compile()<CR>
 nnoremap rr :call Run()<CR>
-
-au bufnewfile,bufread *.py call PyHeader()

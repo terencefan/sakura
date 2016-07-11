@@ -7,7 +7,7 @@ fi
 ##
 
 # MacPorts Installer addition on 2014-03-11_at_18:03:20: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:~/.composer/vendor/bin:$PATH
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 
@@ -16,23 +16,6 @@ LESSOPEN="| /usr/local/bin/src-hilite-lesspipe.sh %s"
 LESS=' -R '
 export LESSOPEN LESS
 
-#
-# Qu Jing iTerm & Terminal Setup Script
-# version 0.3
-# Felix Ding
-# July 12, 2014 @Costa
-#
-function start_qujing {
-  export http_proxy='theironislands.f.getqujing.net:36779'
-  export HTTPS_PROXY='theironislands.f.getqujing.net:36779'
-}
-#
-# Qu Jing iTerm & Terminal Setup Script
-# version 0.3
-# Felix Ding
-# July 12, 2014 @Costa
-#
-function start_qujing {
-  export http_proxy='theironislands.f.getqujing.net:36779'
-  export HTTPS_PROXY='theironislands.f.getqujing.net:36779'
-}
+export GOROOT=/usr/local/go
+export GOPATH=/Users/stdrickforce/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin

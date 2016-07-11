@@ -180,3 +180,10 @@ function cd() {
         return $?
     fi
 }
+
+# nvm
+export NVM_DIR=~/.vim
+source /usr/local/opt/nvm/nvm.sh
+
+# php-version
+source $(brew --prefix php-version)/php-version.sh && php-version 5
