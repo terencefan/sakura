@@ -21,13 +21,14 @@ Bundle 'scrooloose/syntastic'
 Bundle 'solarnz/thrift.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/nginx.vim'
+Bundle 'vim-scripts/taglist.vim'
 
 " Color Schemes
 Bundle 'flazz/vim-colorschemes'
 Bundle 'altercation/vim-colors-solarized'
 
 " Bundle 'MarcWeber/vim-addon-mw-utils'
-" "Bundle 'garbas/vim-snipmate'
+" Bundle 'garbas/vim-snipmate'
 " Bundle 'groenewege/vim-less'
 " Bundle 'jistr/vim-nerdtree-tabs'
 " Bundle 'puppetlabs/puppet-syntax-vim'
@@ -251,6 +252,9 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     let NERDTreeShowHidden=1
     let NERDTreeKeepTreeInNewTab=1
 
+" Taglist
+  map <C-t> :TlistToggle<CR>
+
 " Tabularize {
 function! InitTabularize()
     nmap <leader>a= :Tabularize /=<CR>
@@ -338,7 +342,7 @@ autocmd VimEnter * :call InitTabularize()
     "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
     " AutoComplPop like behavior.
-    "let g:neocomplete#enable_auto_select = 1
+    let g:neocomplete#enable_auto_select = 1
 
     " Shell like behavior(not recommended).
     "set completeopt+=longest
@@ -376,8 +380,8 @@ autocmd VimEnter * :call InitTabularize()
     let g:syntastic_python_flake8_args = '--ignore=E402,F404'
 
     " php
-    let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
-    let g:syntastic_php_phpmd_post_args = 'unusedcode'
+    let g:syntastic_php_checkers = ['php', 'phpmd']
+    let g:syntastic_php_phpmd_post_args = 'codesize,design,unusedcode'
 
     " javascript
     let g:syntastic_javascript_checkers = ['jshint']
