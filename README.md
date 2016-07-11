@@ -1,4 +1,4 @@
 sakura
 ======
 
-stdrickforce's rapid configuration solution for ubuntu
+Nothing to say
