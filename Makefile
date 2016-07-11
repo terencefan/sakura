@@ -8,6 +8,10 @@ help:
 git-completion:
 	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash >> ~/.git-completion.bash
 
+vim-pathogen:
+	mkdir -p ~/.vim/autoload ~/.vim/bundle
+	curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
 collect:
 	# bash.
 	cp ~/.bashrc $(CURDIR)/bash/
@@ -21,4 +25,4 @@ collect:
 	# vim.
 	cp ~/.vimrc $(CURDIR)/vim/
 
-build: git-completion
+build: git-completion vim-pathogen

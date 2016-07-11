@@ -71,61 +71,6 @@ if [[ -f "/usr/local/bin/brew" ]]; then
     fi
 fi
 
-# test android sdk
-if [[ -d "$HOME/tools/android/platform-tools" ]]; then
-    export PATH=$HOME/tools/android/platform-tools:$HOME/tools/android/platform:$HOME/tools/android/tools:$PATH
-fi
-
-# test user bin
-if [[ -d "$HOME/bin" ]]; then
-    export PATH=$HOME/bin:$PATH
-fi
-
-##########
-# virtualenv related
-##########
-
-if which virtualenvwrapper.sh 1>/dev/null; then
-    source virtualenvwrapper.sh
-
-    # Load virtualenvwrapper
-    export WORKON_HOME=$HOME/.virtualenvs
-    export PROJECT_HOME=$HOME/workspace
-
-    # make pip use the same directory for virtualenvs as virtualenvwrapper
-    export PIP_VIRTUALENV_BASE=$WORKON_HOME
-    export PIP_RESPECT_VIRTUALENV=true
-fi
-
-# define auto_virtualenv to make autoenv better for virtualenv
-function autoenv_virtualenv() {
-    # verify virtualenvwrapper installed
-    if which virtualenvwrapper.sh 1>/dev/null; then
-        source virtualenvwrapper.sh
-    else
-        echo "ERROR: virtualenvwrapper not installed."
-        exit $?
-    fi
-
-    # activate or create virtualenv
-    if workon | grep -q "^$1$"; then
-        workon $1
-    else
-        echo -n "$1 doesn't exist, creat now? [y/N] "
-        read answer
-        if [[ "$answer" == "y" ]]; then
-            mkvirtualenv $1
-            if [[ -e "requirements.txt" ]]; then
-                pip install -U -r requirements.txt
-            fi
-        fi
-    fi
-}
-
-##########
-# customized functions
-##########
-
 # make man colorful
 function man() {
     env \

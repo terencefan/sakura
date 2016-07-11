@@ -10,6 +10,10 @@ fi
 export PATH=/opt/local/bin:/opt/local/sbin:~/.composer/vendor/bin:$PATH
 # Finished adapting your PATH environment variable for use with MacPorts.
 
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+
 
 test -r /sw/bin/init.sh && . /sw/bin/init.sh
 LESSOPEN="| /usr/local/bin/src-hilite-lesspipe.sh %s"
