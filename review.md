@@ -1,5 +1,8 @@
 ### EXPECT
 
+- [x] 🔉🕑 haojing代码中通用底层的组件化（如Lta，Mta，Redis等） @腾远
+- [x] 🔊🕑 试水至少一款微服务基础服务，打磨整个流程 @腾远
+
 ### ACTUAL
 1. 确立了composer在haojing中的主导地位（unittest、autoloader），并试图推行给Engineer
 2. haojing部分代码重构（ErrorHandler、route Dispatcher、MData）
