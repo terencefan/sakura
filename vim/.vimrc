@@ -381,7 +381,7 @@ autocmd VimEnter * :call InitTabularize()
 
     " php
     let g:syntastic_php_checkers = ['php', 'phpmd']
-    let g:syntastic_php_phpmd_post_args = 'codesize,design,unusedcode'
+    let g:syntastic_php_phpmd_post_args = 'codesize,design'
 
     " javascript
     let g:syntastic_javascript_checkers = ['jshint']
