@@ -92,9 +92,8 @@ function set_bash_prompt () {
 
   # Set the bash prompt variable.
   PS1="
-${PYTHON_VIRTUALENV}${GREEN}\u@\h ${YELLOW}\w${RESET} ${BRANCH}
+${PYTHON_VIRTUALENV}${GREEN}毛音訸是笨笨@\h ${YELLOW}\w${RESET} ${BRANCH}
 ${PROMPT_SYMBOL} "
-  PS1="毛音訸是笨笨："
 }
 
 # Tell bash to execute this function just before displaying its prompt.
