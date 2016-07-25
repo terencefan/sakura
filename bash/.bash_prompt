@@ -92,7 +92,7 @@ function set_bash_prompt () {
 
   # Set the bash prompt variable.
   PS1="
-${PYTHON_VIRTUALENV}${GREEN}毛音訸是笨笨@\h ${YELLOW}\w${RESET} ${BRANCH}
+${PYTHON_VIRTUALENV}${GREEN}毛音訸@是蠢蠢 ${YELLOW}\w${RESET} ${BRANCH}
 ${PROMPT_SYMBOL} "
 }
 
