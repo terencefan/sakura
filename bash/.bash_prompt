@@ -30,7 +30,7 @@ function set_git_branch {
   fi
 
   # Set arrow icon based on status against remote.
-  remote_pattern="# Your branch is (.*) of"
+  remote_pattern="Your branch is (.*) of"
   if [[ ${git_status} =~ ${remote_pattern} ]]; then
     if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
       remote="↑"
@@ -94,6 +94,7 @@ function set_bash_prompt () {
   PS1="
 ${PYTHON_VIRTUALENV}${GREEN}\u@\h ${YELLOW}\w${RESET} ${BRANCH}
 ${PROMPT_SYMBOL} "
+  PS1="毛音訸是笨笨："
 }
 
 # Tell bash to execute this function just before displaying its prompt.
