@@ -11,7 +11,9 @@ Bundle "gmarik/vundle"
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Shougo/neocomplete'
 Bundle 'StanAngeloff/php.vim'
+Bundle 'derekwyatt/vim-scala'
 Bundle 'godlygeek/tabular'
+Bundle 'isRuslan/vim-es6'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
@@ -20,6 +22,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'solarnz/thrift.vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'uarun/vim-protobuf'
 Bundle 'vim-scripts/nginx.vim'
 Bundle 'vim-scripts/taglist.vim'
 
@@ -47,10 +50,11 @@ Bundle 'altercation/vim-colors-solarized'
 set nocompatible               " must be first line
 set background=dark            " Assume a dark background
 
+syntax on                      " syntax highlighting
+filetype plugin indent on      " Automatically detect file types.
+
 " General
 set fencs=utf-8,gb2312,gbk     " Sets the default encoding
-filetype plugin indent on      " Automatically detect file types.
-syntax on                      " syntax highlighting
 set autochdir                  " always switch to the current file directory.
 
 set nospell                    " spell checking off
@@ -375,13 +379,18 @@ autocmd VimEnter * :call InitTabularize()
     let g:syntastic_check_on_open=1
     let g:syntastic_ignore_files = [".*\.html$"]
 
+    " cpp
+    let g:syntastic_cpp_compiler = 'clang++'
+    let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
     " python
     let g:syntastic_python_checkers = ['flake8']
-    let g:syntastic_python_flake8_args = '--ignore=E402,F404'
+    let g:syntastic_python_flake8_args = '--ignore=F404,E501'
 
     " php
-    let g:syntastic_php_checkers = ['php', 'phpmd']
-    let g:syntastic_php_phpmd_post_args = 'codesize,design'
+    let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+    let g:syntastic_php_phpcs_args = "--standard=/Users/stdrickforce/.vim/syntastic/phpcs.xml"
+    let g:syntastic_php_phpmd_post_args = "xml /Users/stdrickforce/.vim/syntastic/phpmd.xml"
 
     " javascript
     let g:syntastic_javascript_checkers = ['jshint']
@@ -510,13 +519,27 @@ function! PyHeader()
     call append(0, '#!/usr/bin/env python')
     call append(1, '# -*- coding: utf-8 -*-')
     call append(2, '')
-    call append(3, '__author__ = "stdrickforce"  # Tengyuan Fan')
-    call append(4, '# Email: <stdrickforce@gmail.com> <tfan@xingin.com>')
+    call append(3, '# Author: stdrickforce (Tengyuan Fan)')
+    call append(4, '# Email: <stdrickforce@gmail.com> <fantengyuan@baixing.com>')
     call append(5, '')
     echohl WarningMsg | echo "Successful in adding the header." | echohl None
 endf
 
+" Auto add .php header.
+function! PhpHeader()
+  let line = getline(1)
+  if !(line =~ '\<\?php')
+    call append(0, '<?php')
+  endif
+
+  let line = getline(2)
+  if !(line =~ '\S*fantengyuan\S*')
+    call append(1, '// fantengyuan@baixing.com')
+  endif
+endf
+
 au bufnewfile,bufread *.py call PyHeader()
+au bufnewfile,bufread *.php call PhpHeader()
 
 " Auto compile .cpp file.
 function! CompileCpp()
@@ -544,16 +567,19 @@ function! CompileJava()
 endf
 
 function! Run()
-    if &filetype == 'python'
-        exec "!python %"
-    elseif &filetype == 'php'
-        exec "!php %"
-    elseif &filetype == 'cpp'
-        call CompileCpp()
-    elseif &filetype == 'java'
-        call CompileJava()
-    endif
+  if &filetype == 'sh'
+    call "!bash %"
+  elseif &filetype == 'python'
+    exec "!time python %"
+  elseif &filetype == 'php'
+    exec "!php %"
+  elseif &filetype == 'javascript'
+    exec "!node %"
+  elseif &filetype == 'cpp'
+    call CompileCpp()
+  elseif &filetype == 'java'
+    call CompileJava()
+  endif
 endf
 
-nnoremap cc :call Compile()<CR>
 nnoremap rr :call Run()<CR>

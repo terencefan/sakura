@@ -2,13 +2,14 @@ if [ "${BASH-no}" != "no" ]; then
     [ -r ~/.bashrc ] && . ~/.bashrc
 fi
 
-# git completion
+# git
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-export PATH=$PATH:/opt/local/bin:/opt/local/sbin
+# nvm
+export NVM_DIR="$HOME/.nvm"
+  . "/usr/local/opt/nvm/nvm.sh"
 
 # composer path
 export PATH=~/.composer/vendor/bin:$PATH
@@ -17,3 +18,8 @@ export PATH=~/.composer/vendor/bin:$PATH
 export GOROOT=/usr/local/go
 export GOPATH=/Users/stdrickforce/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+echo ""
+echo -e "\033[32m  ├┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┤\033[0m \033[36mE! E! E!"
+echo -e "\033[32m  ├  ++++++ \033[35mエミリア\033[0mたんまじ\033[33m天使\033[0m!\033[32m ++++++ ┤ \033[36mM! M! M!"
+echo -e "\033[32m  ├┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┤\033[0m \033[36mT! T! T!\033[0m"
