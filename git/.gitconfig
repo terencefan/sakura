@@ -1,25 +1,25 @@
 [color]
-    ui = auto
+  ui = auto
 [alias]
-    co = checkout
-    br = branch
-    ci = commit
-    st = status
-    last = log -1 HEAD
-    unstage = reset HEAD --
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
+  last = log -1 HEAD
+  unstage = reset HEAD --
 [core]
-    editor = vim
-	autocrlf = false
-    safecrlf = true
+  editor = vim
+  autocrlf = false
+  safecrlf = true
 [push]
-    default = current
+  default = current
 [rerere]
-    enabled = 1
-    autoupdate = 1
+  enabled = 1
+  autoupdate = 1
 [user]
-    name = stdrickforce
-    email = stdrickforce@gmail.com
+  name = stdrickforce
+  email = stdrickforce@gmail.com
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
