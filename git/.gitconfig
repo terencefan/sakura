@@ -9,7 +9,7 @@
     unstage = reset HEAD --
 [core]
     editor = vim
-    autocrlf = input
+	autocrlf = false
     safecrlf = true
 [push]
     default = current
@@ -19,3 +19,7 @@
 [user]
     name = stdrickforce
     email = stdrickforce@gmail.com
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true

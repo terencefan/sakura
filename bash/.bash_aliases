@@ -44,3 +44,7 @@ alias g++='g++ -std=c++11'
 
 # compile thrift file to php
 alias ctp='thrift --gen php:server,psr4 -out build'
+
+# php syntastic checker.
+alias phpcs='phpcs --standard=/Users/stdrickforce/.vim/syntastic/phpcs.xml'
+alias phpcbf='phpcbf --standard=/Users/stdrickforce/.vim/syntastic/phpcs.xml'

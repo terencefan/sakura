@@ -52,6 +52,7 @@ export CLICOLOR=1
 ###################
 
 if [[ -f "/usr/local/bin/brew" ]]; then
+  echo waiting for homebrew to be registered...
 
   # auto add gnubin before $PATH
   if [[ -d "/usr/local/opt/coreutils" ]]; then
@@ -66,12 +67,14 @@ if [[ -f "/usr/local/bin/brew" ]]; then
 
 fi
 
-# initialize git completion
+# git completion
+echo initializing git completion...
 if [[ -f ~/.git-completion.bash ]]; then
   . ~/.git-completion.bash
 fi
 
 # nvm
+echo preparing nvm enviroments...
 if [[ -d "/usr/local/opt/nvm" ]]; then
   export NVM_DIR="$HOME/.nvm"
   source "/usr/local/opt/nvm/nvm.sh"
@@ -97,3 +100,5 @@ function man() {
         LESS_TERMCAP_us=$(printf "\e[1;32m") \
             man "$@"
 }
+
+clear

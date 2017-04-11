@@ -22,21 +22,15 @@ tmux:
 vim: vim-pathogen
 	cp $(CURDIR)/vim/.vimrc ~/
 
-bsh:
-	cp $(CURDIR)/bash/.bashrc ~/
-	cp $(CURDIR)/bash/.bash_aliases ~/
-	cp $(CURDIR)/bash/.bash_prompt ~/
-	cp $(CURDIR)/bash/.bash_profile ~/
+bash:
+	cp $(CURDIR)/bash/.bash* ~/
 	source ~/.bashrc
 
 build: bsh git vim tmux
 
 collect:
 	# bash.
-	cp ~/.bashrc $(CURDIR)/bash/
-	cp ~/.bash_aliases $(CURDIR)/bash/
-	cp ~/.bash_prompt $(CURDIR)/bash/
-	cp ~/.bash_profile $(CURDIR)/bash/
+	cp ~/.bash* $(CURDIR)/bash/
 	# git.
 	cp ~/.gitconfig $(CURDIR)/git/
 	# tmux.
