@@ -88,6 +88,9 @@ export GOROOT=/usr/local/go
 export GOPATH=/Users/stdrickforce/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+# homebrew
+export PATH="/usr/local/sbin:$PATH"
+
 # make man colorful
 function man() {
     env \

@@ -32,9 +32,17 @@ alias cddh='cd ~/workspace/eleme/draenor/draenor/hrs/'
 
 # Haojing.
 alias cdh='cd ~/workspace/baixing/haojing/'
-alias hpu='~/workspace/baixing/haojing/unittest/vendor/bin/phpunit -c ~/workspace/baixing/haojing/unittest/phpunit.xml'
+alias hpu='phpunit -c ~/workspace/baixing/haojing/unittest/phpunit.xml'
 
 # baixing
+# -h for human readable
+# -l for copy symlinks
+# -r for recursive
+# -t for preserve times
+# -u for update (skip newer files on receiver)
+# -O for omit directories when preserving times.
+# -P for show progress
+# --del for deletes during xfer
 alias rshj='rsync -hlrtuOP --del --exclude-from ~/.rsync_ignore ~/workspace/baixing/haojing/ haojing:~/haojing/'
 alias rslkk='rsync -hlrtuP --del --exclude-from ~/.rsync_ignore ~/workspace/baixing/OrosOlymPos/ lkk:~/lkk/'
 alias rsp='rsync -hlrtuP --del --exclude-from ~/.rsync_ignore ~/workspace/baixing/pigeon/ pigeon-s:/srv/pigeon/'
@@ -45,6 +53,5 @@ alias g++='g++ -std=c++11'
 # compile thrift file to php
 alias ctp='thrift --gen php:server,psr4 -out build'
 
-# php syntastic checker.
-alias phpcs='phpcs --standard=/Users/stdrickforce/.vim/syntastic/phpcs.xml'
-alias phpcbf='phpcbf --standard=/Users/stdrickforce/.vim/syntastic/phpcs.xml'
+# fast open thrift compiler.
+alias vitc='cd /Users/stdrickforce/workspace/baixing/Thrift/compiler/src && vi thrift'

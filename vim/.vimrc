@@ -55,7 +55,7 @@ filetype plugin indent on      " Automatically detect file types.
 
 " General
 set fencs=utf-8,gb2312,gbk     " Sets the default encoding
-set autochdir                  " always switch to the current file directory.
+" set autochdir                  " always switch to the current file directory.
 
 set nospell                    " spell checking off
 set shortmess+=filmnrxoOtT     " abbrev. of messages (avoids 'hit enter')
@@ -81,22 +81,13 @@ set clipboard+=unnamed
 " => Vim UI
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if has('gui_running')
-    if filereadable(expand("~/.vim/bundle/vim-colorschemes/colors/jellybeans.vim"))
-        colorscheme jellybeans
-    endif
-    set guioptions-=T          " remove the toolbar
-    set guioptions-=L          " remove the left scrollbar
-    set guioptions-=r          " remove the right scrollbar
-else
-    if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-        color solarized                    " load a colorscheme
-        let g:solarized_termcolors=256
-        let g:solarized_termtrans=1
-    endif
-    set term=builtin_xterm         " Make terminal stuff works
-    set t_Co=256
+if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+    color solarized                    " load a colorscheme
+    let g:solarized_termcolors=256
+    let g:solarized_termtrans=1
 endif
+set term=builtin_xterm         " Make terminal stuff works
+set t_Co=256
 
 set tabpagemax=15             " only show 15 tabs
 set showmode                  " display the current mode
@@ -131,6 +122,7 @@ set magic                      " Set magic on, for regular expressions
 set autoread                   " Auto reload file on change
 set list
 set listchars=tab:>\ ,trail:\ ,extends:#,nbsp:\  " Highlight problematic whitespace
+set cc=100
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -143,9 +135,9 @@ set autoindent      " Auto indent
 set smartindent     " Smart indet
 set expandtab       " tabs are spaces, not tabs
 set smarttab        " Smart tab
-set shiftwidth=2    " use indents of 4 spaces
-set tabstop=2       " an indentation every four columns
-set softtabstop=2   " let backspace delete indent
+set shiftwidth=4    " use indents of 4 spaces
+set tabstop=4       " an indentation every four columns
+set softtabstop=4   " let backspace delete indent
 " Remove trailing whitespaces and ^M chars
 "autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
@@ -343,16 +335,16 @@ autocmd VimEnter * :call InitTabularize()
     inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
     " Close popup by <Space>.
-    "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+    " inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
     " AutoComplPop like behavior.
     let g:neocomplete#enable_auto_select = 1
 
     " Shell like behavior(not recommended).
-    "set completeopt+=longest
-    "let g:neocomplete#enable_auto_select = 1
-    "let g:neocomplete#disable_auto_complete = 1
-    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+    " set completeopt+=longest
+    " let g:neocomplete#enable_auto_select = 1
+    " let g:neocomplete#disable_auto_complete = 1
+    " inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
     " Enable omni completion.
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -365,9 +357,9 @@ autocmd VimEnter * :call InitTabularize()
     if !exists('g:neocomplete#sources#omni#input_patterns')
       let g:neocomplete#sources#omni#input_patterns = {}
     endif
-    "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-    "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+    " let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+    " let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+    " let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
     " For perlomni.vim setting.
     " https://github.com/c9s/perlomni.vim
@@ -389,7 +381,7 @@ autocmd VimEnter * :call InitTabularize()
 
     " php
     let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
-    let g:syntastic_php_phpcs_args = "--standard=/Users/stdrickforce/.vim/syntastic/phpcs.xml"
+    let g:syntastic_php_phpcs_args = "--standard=PSR2"
     let g:syntastic_php_phpmd_post_args = "xml /Users/stdrickforce/.vim/syntastic/phpmd.xml"
 
     " javascript
@@ -411,15 +403,19 @@ autocmd VimEnter * :call InitTabularize()
     autocmd BufRead,BufNewFile *.jedi set filetype=jedi
     autocmd BufRead,BufNewFile *.thrift set filetype=thrift
     autocmd BufRead,BufNewFile *.json set filetype=json
+    autocmd BufRead,BufNewFile *.l set filetype=lex
+    autocmd BufRead,BufNewFile *.df set filetype=dockerfile
 
 " Nginx Filetypes.
     autocmd BufRead,BufNewFile /etc/nginx/* set filetype=nginx
     autocmd BufRead,BufNewFile /usr/local/etc/nginx/* set filetype=nginx
 
 " Indent Fixes
-    autocmd FileType php setlocal noexpandtab nolist cc=120
-    autocmd FileType python setlocal cc=80
-    autocmd FileType json set noexpandtab tabstop=4
+    au Filetype python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+    au FileType python setlocal cc=80
+    au FileType json set noexpandtab
+    au FileTYpe cpp set shiftwidth=2 tabstop=2 softtabstop=2
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Funtion define
@@ -538,15 +534,28 @@ function! PhpHeader()
   endif
 endf
 
+" Haojing fixes.
+au bufnewfile,bufread */haojing*/*.php setlocal noexpandtab nolist
+" au bufnewfile,bufread */haojing/*.php setlocal shiftwidth=2 tabstop=2 softtabstop=2
+au bufnewfile,bufread */haojing*/*.php let b:syntastic_php_phpcs_args = "--standard=/Users/stdrickforce/.vim/syntastic/phpcs.xml"
+au bufnewfile,bufread */haojing/*.php call PhpHeader()
+
+" thriftphp.
+au bufnewfile,bufread */thriftphp* lcd /Users/stdrickforce/workspace/thriftphp/
+
+" python header.
 au bufnewfile,bufread *.py call PyHeader()
-au bufnewfile,bufread *.php call PhpHeader()
+
+" au bufnewfile,bufread */Moutan/* let b:syntastic_php_phpcs_args = ""
 
 " Auto compile .cpp file.
-function! CompileCpp()
+function! Compile()
     exec "w"
     exec "cclose"
     if &filetype == 'cpp'
         set makeprg=g++\ -o\ %<\ %
+    elseif &filetype == 'c'
+        set makeprg=gcc\ -o\ %<\ %
     endif
     silent make
     exec "normal :"
@@ -575,8 +584,8 @@ function! Run()
     exec "!php %"
   elseif &filetype == 'javascript'
     exec "!node %"
-  elseif &filetype == 'cpp'
-    call CompileCpp()
+  elseif &filetype == 'c' || &filetype == 'cpp'
+    call Compile()
   elseif &filetype == 'java'
     call CompileJava()
   endif
