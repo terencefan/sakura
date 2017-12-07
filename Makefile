@@ -30,11 +30,14 @@ build: bsh git vim tmux
 
 collect:
 	# bash.
-	cp -r ~/.bash* $(CURDIR)/bash/
+	rsync ~/.bashrc $(CURDIR)/bash/
+	rsync ~/.bash_* $(CURDIR)/bash/
+	# zsh
+	rsync ~/.zshrc $(CURDIR)/zsh/
+	rsync ~/.bash_* $(CURDIR)/zsh/
 	# git.
 	cp -r ~/.gitconfig $(CURDIR)/git/
 	# tmux.
 	cp -r ~/.tmux.conf $(CURDIR)/tmux/
 	# vim.
 	cp -r ~/.vimrc $(CURDIR)/vim/
-

@@ -3,45 +3,48 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Enable vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle "gmarik/vundle"
+set rtp+=~/.vim/bundle/Vundle.vim/
+
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
 
 " Enable plugins
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'Shougo/neocomplete'
-Bundle 'StanAngeloff/php.vim'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'godlygeek/tabular'
-Bundle 'isRuslan/vim-es6'
-Bundle 'kien/ctrlp.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'mileszs/ack.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'solarnz/thrift.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'uarun/vim-protobuf'
-Bundle 'vim-scripts/nginx.vim'
-Bundle 'vim-scripts/taglist.vim'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'SirVer/ultisnips'
+Plugin 'StanAngeloff/php.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'beanworks/vim-phpfmt'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'ervandew/supertab'
+Plugin 'fatih/vim-go'
+Plugin 'gf3/peg.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'isRuslan/vim-es6'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'mileszs/ack.vim'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'rust-lang/rust.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'solarnz/thrift.vim'
+Plugin 'tobyS/pdv'
+Plugin 'tobyS/vmustache'
+Plugin 'tpope/vim-fugitive'
+Plugin 'uarun/vim-protobuf'
+Plugin 'vim-scripts/nginx.vim'
+Plugin 'vim-scripts/taglist.vim'
 
 " Color Schemes
-Bundle 'flazz/vim-colorschemes'
-Bundle 'altercation/vim-colors-solarized'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'altercation/vim-colors-solarized'
 
-" Bundle 'MarcWeber/vim-addon-mw-utils'
-" Bundle 'garbas/vim-snipmate'
-" Bundle 'groenewege/vim-less'
-" Bundle 'jistr/vim-nerdtree-tabs'
-" Bundle 'puppetlabs/puppet-syntax-vim'
-" Bundle 'rstacruz/sparkup'
-" Bundle 'tomtom/tlib_vim'
-" Bundle 'tpope/vim-markdown'
-" Bundle 'tpope/vim-rails'
-" Bundle 'tpope/vim-surround'
-" Bundle 'vim-scripts/AutoClose'
-
+call vundle#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Environment
@@ -55,7 +58,7 @@ filetype plugin indent on      " Automatically detect file types.
 
 " General
 set fencs=utf-8,gb2312,gbk     " Sets the default encoding
-" set autochdir                  " always switch to the current file directory.
+set autochdir                  " always switch to the current file directory.
 
 set nospell                    " spell checking off
 set shortmess+=filmnrxoOtT     " abbrev. of messages (avoids 'hit enter')
@@ -69,9 +72,14 @@ set undofile                   " persistent undo
 set undolevels=1000            " maximum number of changes that can be undone
 set undoreload=10000           " maximum number lines to save for undo on a buffer reload
 set undodir=~/.vim/undo
+set foldlevel=2
 
-" When vimrc is edited, reload it
-autocmd! BufWritePost ~/.vimrc source ~/.vimrc
+" auto save/load foldlevel
+" au BufWinLeave * silent mkview
+" au BufWinEnter * silent loadview
+
+" Reload vimrc when it is edited.
+" au! BufWritePost ~/.vimrc source ~/.vimrc
 
 " set clipboard
 set clipboard+=unnamed
@@ -115,7 +123,6 @@ set wildmode=list:longest,full " Command <Tab> completion, list matches, then lo
 set whichwrap=b,s,h,l,<,>,[,]  " Backspace and cursor keys wrap to
 set scrolljump=5               " Lines to scroll when cursor leaves screen
 set scrolloff=3                " Minimum lines to keep above and below cursor
-set nofoldenable               " Disable fold code
 set gdefault                   " The /g flag on :s substitutions by default
 set hidden                     " Change buffer - without saving
 set magic                      " Set magic on, for regular expressions
@@ -138,8 +145,8 @@ set smarttab        " Smart tab
 set shiftwidth=4    " use indents of 4 spaces
 set tabstop=4       " an indentation every four columns
 set softtabstop=4   " let backspace delete indent
+
 " Remove trailing whitespaces and ^M chars
-"autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 
@@ -150,14 +157,12 @@ autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:va
 "location
 let mapleader = ','
 
-" Fast editing of the .vimrc
-map <leader>v :e ~/.vimrc<cr>
-
 " Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
 nnoremap ; :
 
-" Remap VIM 0
+" Remap VIM ^/$
 map 0 ^
+map - $
 
 inoremap jk <Esc>
 
@@ -177,9 +182,6 @@ noremap gw :tabclose<cr>
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
 
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
 " Close the current buffer
 map <leader>d :Bclose<cr>
 
@@ -193,19 +195,30 @@ map <leader>cd :cd %:p:h<cr>
 nnoremap Y y$
 
 " Code folding options
-nmap <leader>f0 :set foldlevel=0<CR>
-nmap <leader>f1 :set foldlevel=1<CR>
-nmap <leader>f2 :set foldlevel=2<CR>
-nmap <leader>f3 :set foldlevel=3<CR>
-nmap <leader>f4 :set foldlevel=4<CR>
-nmap <leader>f5 :set foldlevel=5<CR>
-nmap <leader>f6 :set foldlevel=6<CR>
-nmap <leader>f7 :set foldlevel=7<CR>
-nmap <leader>f8 :set foldlevel=8<CR>
-nmap <leader>f9 :set foldlevel=9<CR>
+nmap f0 :set foldlevel=0<CR>
+nmap f1 :set foldlevel=1<CR>
+nmap f2 :set foldlevel=2<CR>
+nmap f3 :set foldlevel=3<CR>
+nmap f4 :set foldlevel=4<CR>
+nmap f5 :set foldlevel=5<CR>
+nmap f6 :set foldlevel=6<CR>
+nmap f7 :set foldlevel=7<CR>
+nmap f8 :set foldlevel=8<CR>
+nmap f9 :set foldlevel=9<CR>
 
-"clearing highlighted search
+nmap <space> za
+" nmap <C-k> zr
+" nmap <C-j> zm
+
+" Jump to next/previous word
+nmap <C-h> b
+nmap <C-l> w
+
+" clearing highlighted search
 nmap <silent> <leader>/ :nohlsearch<CR>
+
+" Fast sort selected area.
+vmap <leader>s :sort<CR>
 
 " Shortcuts
 " Change Working Directory to that of the current file
@@ -227,8 +240,9 @@ au FocusLost * :silent! wall                 " Save on FocusLost
 au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLost
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins {
+" Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Misc
     let g:NERDShutUp=1
     let b:match_ignorecase = 1
@@ -242,7 +256,15 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     nmap <leader>nt :NERDTreeFind<CR>
 
     let NERDTreeShowBookmarks=1
-    let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.DS_Store']
+    let NERDTreeIgnore=[
+                \ '\.pyc',
+                \ '\.swo$',
+                \ '\.swp$',
+                \ '\.git',
+                \ '\.svn',
+                \ '\.bzr',
+                \ '\.DS_Store'
+                \ ]
     let NERDTreeChDirMode=2
     let NERDTreeQuitOnOpen=1
     let NERDTreeShowHidden=1
@@ -251,27 +273,6 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
 " Taglist
   map <C-t> :TlistToggle<CR>
 
-" Tabularize {
-function! InitTabularize()
-    nmap <leader>a= :Tabularize /=<CR>
-    vmap <leader>a= :Tabularize /=<CR>
-    nmap <leader>a: :Tabularize /:<CR>
-    vmap <leader>a: :Tabularize /:<CR>
-    nmap <leader>a:: :Tabularize /:\zs<CR>
-    vmap <leader>a:: :Tabularize /:\zs<CR>
-    nmap <leader>a, :Tabularize /,<CR>
-    vmap <leader>a, :Tabularize /,<CR>
-    nmap <leader>a<Bar> :Tabularize /<Bar><CR>
-    vmap <leader>a<Bar> :Tabularize /<Bar><CR>
-endf
-
-autocmd VimEnter * :call InitTabularize()
-
-" Session List
-    set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
-    nmap <leader>sl :SessionList<CR>
-    nmap <leader>ss :SessionSave<CR>
-
 " Ctrlp
     let g:ctrlp_working_path_mode = 'rc'
     nnoremap <C-o> :CtrlPBuffer<CR>
@@ -279,7 +280,8 @@ autocmd VimEnter * :call InitTabularize()
     nnoremap <C-e> :CtrlPClearCache<CR>
     let g:ctrlp_custom_ignore = {
         \ 'dir':  '\.git$\|\.hg$\|\.svn$\|build$',
-        \ 'file': '\.exe$\|\.so$\|\.dll$\|\.DS_Store$\|\.pyc$' }
+        \ 'file': '\.exe$\|\.so$\|\.dll$\|\.DS_Store$\|\.pyc$'
+        \ }
 
 " Tagbar
     nnoremap <silent> <leader>t :TagbarToggle<CR>
@@ -290,80 +292,27 @@ autocmd VimEnter * :call InitTabularize()
     nnoremap <silent> <leader>gc :Gcommit<CR>
     nnoremap <silent> <leader>gb :Gblame<CR>
     nnoremap <silent> <leader>gl :Glog<CR>
-    nnoremap <silent> <leader>gp :Git push<CR>
 
-" Neocomplete
+" Gutter
+    let g:gitgutter_enabled = 0
 
-    " Disable AutoComplPop.
-    let g:acp_enableAtStartup = 0
-    " Use neocomplete.
-    let g:neocomplete#enable_at_startup = 1
-    " Use smartcase.
-    let g:neocomplete#enable_smart_case = 1
-    " Set minimum syntax keyword length.
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
-    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+    nnoremap <silent> <leader>g] :GitGutterNextHunk<CR>
+    nnoremap <silent> <leader>g[ :GitGutterPrevHunk<CR>
+    nnoremap <silent> <leader>gu :GitGutterUndoHunk<CR>
+    nnoremap <silent> <leader>gp :GitGutterPreviewHunk<CR>
+    nnoremap <silent> <leader>gg :GitGutterToggle<CR>
+    nnoremap <silent> <leader>gh :GitGutterLineHighlightsToggle<CR>
 
-    " Define dictionary.
-    let g:neocomplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-            \ }
+" YouCompleteMe
 
-    " Define keyword.
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+    let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+    let g:ycm_confirm_extra_conf = 0
 
-    " Plugin key-mappings.
-    inoremap <expr><C-g>     neocomplete#undo_completion()
-    inoremap <expr><C-l>     neocomplete#complete_common_string()
+    " nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+    " nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+    nnoremap <leader>gt :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-    " Recommended key-mappings.
-    " <CR>: close popup and save indent.
-    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-    function! s:my_cr_function()
-      return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-      " For no inserting <CR> key.
-      "return pumvisible() ? "\<C-y>" : "\<CR>"
-    endfunction
-    " <TAB>: completion.
-    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-    " <C-h>, <BS>: close popup and delete backword char.
-    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-    " Close popup by <Space>.
-    " inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-    " AutoComplPop like behavior.
-    let g:neocomplete#enable_auto_select = 1
-
-    " Shell like behavior(not recommended).
-    " set completeopt+=longest
-    " let g:neocomplete#enable_auto_select = 1
-    " let g:neocomplete#disable_auto_complete = 1
-    " inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-    " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-    " Enable heavy omni completion.
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-      let g:neocomplete#sources#omni#input_patterns = {}
-    endif
-    " let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    " let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-    " let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-    " For perlomni.vim setting.
-    " https://github.com/c9s/perlomni.vim
-    let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+    cmap ycd :YcmDiags<CR>
 
 " Syntastic
 
@@ -371,16 +320,27 @@ autocmd VimEnter * :call InitTabularize()
     let g:syntastic_check_on_open=1
     let g:syntastic_ignore_files = [".*\.html$"]
 
+    " let g:syntastic_c_compiler = 'gcc'
+    " let g:syntastic_c_compiler_options = '
+    "     \ -std=c++11 -stdlib=libc++
+    "     \ -I/usr/local/Cellar/php70/7.0.20_12/include/php/
+    "     \ -I/usr/local/Cellar/php70/7.0.20_12/include/php/main/
+    "     \ -I/usr/local/Cellar/php70/7.0.20_12/include/php/Zend/
+    "     \ -I/usr/local/Cellar/php70/7.0.20_12/include/php/TSRM/
+    " \'
+
     " cpp
-    let g:syntastic_cpp_compiler = 'clang++'
-    let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+    " let g:syntastic_cpp_compiler = 'g++'
+    " let g:syntastic_cpp_compiler_options = '
+    "     \ -std=c++11 -stdlib=libc++
+    " \'
 
     " python
     let g:syntastic_python_checkers = ['flake8']
     let g:syntastic_python_flake8_args = '--ignore=F404,E501'
 
     " php
-    let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+    let g:syntastic_php_checkers = ['php', 'phpmd']
     let g:syntastic_php_phpcs_args = "--standard=PSR2"
     let g:syntastic_php_phpmd_post_args = "xml /Users/stdrickforce/.vim/syntastic/phpmd.xml"
 
@@ -388,11 +348,46 @@ autocmd VimEnter * :call InitTabularize()
     let g:syntastic_javascript_checkers = ['jshint']
 
     " golang
-    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+    let g:syntastic_go_checkers = ['go']
+
+    " yaml
+    let g:syntastic_yaml_checkers = ['yamllint']
+    let g:syntastic_yaml_yamllint_args = "-d relaxed"
+
+    au Filetype yaml let g:syntastic_quiet_messages={'level':'warnings'}
 
 " Powerline
     let g:Powerline_symbols = 'fancy'
+    python from powerline.vim import setup as powerline_setup
+    python powerline_setup()
+    python del powerline_setup
+
+
+" vim-go
+    let g:go_fmt_command = "goimports"
+
+" vim-phpfmt
+    let g:phpfmt_standard = 'PSR2'
+
+" vim-autoformat
+    let g:formatter_yapf_style = "facebook"
+
+    let g:formatdef_astyle_cpp = '"astyle -A14 -s2 -p -xC80 -f"'
+    let g:formatters_c = ["astyle_cpp"]
+    let g:formatters_cpp = ["astyle_cpp"]
+
+    au BufWritePre *.py :Autoformat
+    au BufWritePre *.h :Autoformat
+    au BufWritePre *.c :Autoformat
+    au BufWritePre *.cc :Autoformat
+    au BufWritePre *.cpp :Autoformat
+
+" vim-cpp-enhanced-highlight
+    let g:cpp_class_scope_highlight = 1
+
+" pdv
+    let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
+    nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Languages
@@ -405,92 +400,36 @@ autocmd VimEnter * :call InitTabularize()
     autocmd BufRead,BufNewFile *.json set filetype=json
     autocmd BufRead,BufNewFile *.l set filetype=lex
     autocmd BufRead,BufNewFile *.df set filetype=dockerfile
+    autocmd BufRead,BufNewFile *.dcf set filetype=dockerfile
+    autocmd BufRead,BufNewFile *.h set filetype=cpp
+    autocmd BufRead,BufNewFile *.zsh set filetype=sh
+    autocmd BufRead,BufNewFile *.zsh-theme set filetype=sh
 
 " Nginx Filetypes.
     autocmd BufRead,BufNewFile /etc/nginx/* set filetype=nginx
     autocmd BufRead,BufNewFile /usr/local/etc/nginx/* set filetype=nginx
+    autocmd BufRead,BufNewFile nginx.conf set filetype=nginx
 
-" Indent Fixes
+" K8s.
+    autocmd BufRead,BufNewFile /Users/stdrickforce/.kube/config set filetype=yaml
+
+" Indent
     au Filetype python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-    au FileType python setlocal cc=80
-    au FileType json set noexpandtab
-    au FileTYpe cpp set shiftwidth=2 tabstop=2 softtabstop=2
+    au Filetype python setlocal cc=80
+    au Filetype cpp set shiftwidth=2 tabstop=2 softtabstop=2
+    au Filetype yacc set shiftwidth=2 tabstop=2 softtabstop=2
+    au Filetype yaml set shiftwidth=2 tabstop=2 softtabstop=2
+
+" Foldlevel
+    au Filetype yaml set foldlevel=9
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Funtion define
+" Funtion define
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Search selection
-function! VisualSearch(direction) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", '\\/.*$^~[]')
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
-
-" Close buffer
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-    let l:currentBufNum = bufnr("%")
-    let l:alternateBufNum = bufnr("#")
-
-    if buflisted(l:alternateBufNum)
-        buffer #
-    else
-        bnext
-    endif
-
-    if bufnr("%") == l:currentBufNum
-        new
-    endif
-
-    if buflisted(l:currentBufNum)
-        execute("bdelete! ".l:currentBufNum)
-    endif
-endfunction
-
-augroup JumpCursorOnEdit
-   au!
-   autocmd BufReadPost *
-        \ if expand("<afile>:p:h") !=? $TEMP |
-        \   if line("'\"") > 1 && line("'\"") <= line("$") |
-        \     let JumpCursorOnEdit_foo = line("'\"") |
-        \     let b:doopenfold = 1 |
-        \     if (foldlevel(JumpCursorOnEdit_foo) > foldlevel(JumpCursorOnEdit_foo - 1)) |
-        \        let JumpCursorOnEdit_foo = JumpCursorOnEdit_foo - 1 |
-        \        let b:doopenfold = 2 |
-        \     endif |
-        \     exe JumpCursorOnEdit_foo |
-        \   endif |
-        \ endif
-   " Need to postpone using "zv" until after reading the modelines.
-   autocmd BufWinEnter *
-        \ if exists("b:doopenfold") |
-        \   exe "normal zv" |
-        \   if(b:doopenfold > 1) |
-        \       exe  "+".1 |
-        \   endif |
-        \   unlet b:doopenfold |
-        \ endif
-augroup END
-
 
 " python fold
 set foldmethod=indent
-
 
 " Golang
 let g:go_highlight_functions = 1
@@ -498,7 +437,6 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-
 
 " Auto add .py header.
 function! PyHeader()
@@ -521,7 +459,8 @@ function! PyHeader()
     echohl WarningMsg | echo "Successful in adding the header." | echohl None
 endf
 
-" Auto add .php header.
+" Auto add header for php files.
+" Just for Haojing
 function! PhpHeader()
   let line = getline(1)
   if !(line =~ '\<\?php')
@@ -529,33 +468,28 @@ function! PhpHeader()
   endif
 
   let line = getline(2)
-  if !(line =~ '\S*fantengyuan\S*')
+  if !(line =~ '\/[\/\*]S*')
     call append(1, '// fantengyuan@baixing.com')
   endif
 endf
 
 " Haojing fixes.
+let phpcs_hj = "--standard=/Users/stdrickforce/workspace/baixing/haojing/phpcs_ruleset.xml"
 au bufnewfile,bufread */haojing*/*.php setlocal noexpandtab nolist
-" au bufnewfile,bufread */haojing/*.php setlocal shiftwidth=2 tabstop=2 softtabstop=2
-au bufnewfile,bufread */haojing*/*.php let b:syntastic_php_phpcs_args = "--standard=/Users/stdrickforce/.vim/syntastic/phpcs.xml"
+au bufnewfile,bufread */haojing*/*.php let g:phpfmt_options = phpcs_hj
 au bufnewfile,bufread */haojing/*.php call PhpHeader()
-
-" thriftphp.
-au bufnewfile,bufread */thriftphp* lcd /Users/stdrickforce/workspace/thriftphp/
 
 " python header.
 au bufnewfile,bufread *.py call PyHeader()
 
-" au bufnewfile,bufread */Moutan/* let b:syntastic_php_phpcs_args = ""
-
-" Auto compile .cpp file.
+" Compile & Run .cpp file.
 function! Compile()
     exec "w"
     exec "cclose"
     if &filetype == 'cpp'
-        set makeprg=g++\ -o\ %<\ %
+        set makeprg=g++\ -std=c++11\ -D__TEST__\ -o\ %<\ %
     elseif &filetype == 'c'
-        set makeprg=gcc\ -o\ %<\ %
+        set makeprg=gcc\ -std=c99\ -D__TEST__\ -o\ %<\ %
     endif
     silent make
     exec "normal :"
@@ -568,11 +502,38 @@ function! Compile()
     endif
 endf
 
-" Auto compile .java file.
+" Compile & Run .java file.
 function! CompileJava()
     exec "w"
-    exec "!javac %"
+    silent exec "!javac %"
     exec "!java %<"
+endf
+
+" Compile & Run .lex file.
+function! CompileFlex()
+    exec "w"
+    silent exec "!flex -o l.c %"
+    silent exec "!gcc -o fl l.c -ll"
+    exec "! ./fl"
+endf
+
+" Compile & Run Golang Project.
+function! CompileGolang()
+    exec "w"
+    silent exec "!go build -o main"
+    exec "!time ./main"
+endf
+
+function! K8sDryRun()
+    exec "!kubectl create -f % --dry-run"
+endf
+
+function! K8sCreate()
+    exec "!kubectl create -f % --dry-run -o yaml | kubectl create -f -"
+endf
+
+function! K8sReplace()
+    exec "!kubectl create -f % --dry-run -o yaml | kubectl replace -f -"
 endf
 
 function! Run()
@@ -581,14 +542,38 @@ function! Run()
   elseif &filetype == 'python'
     exec "!time python %"
   elseif &filetype == 'php'
-    exec "!php %"
+    exec "!time php %"
   elseif &filetype == 'javascript'
-    exec "!node %"
-  elseif &filetype == 'c' || &filetype == 'cpp'
+    exec "!time node %"
+  elseif &filetype == 'ruby'
+    exec "!time ruby %"
+  elseif &filetype == 'c'
     call Compile()
+  elseif &filetype == 'cpp'
+    call Compile()
+  elseif &filetype == 'go'
+    call CompileGolang()
   elseif &filetype == 'java'
     call CompileJava()
+  elseif &filetype == 'yaml'
+    call K8sDryRun()
+  else
+    exec "!make run"
   endif
 endf
 
+nnoremap sc :call K8sCreate()<CR>
+nnoremap sr :call K8sReplace()<CR>
+
 nnoremap rr :call Run()<CR>
+nnoremap rl :source ~/.vimrc<CR>
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"

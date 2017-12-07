@@ -5,17 +5,11 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# if [[ $EUID -ne 0 ]]; then
-#     PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-# else
-#     PS1='\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-# fi
-
 # don't put duplicate lines in the history
 HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
-shopt -s histappend
+# shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
@@ -23,17 +17,22 @@ HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+# shopt -s checkwinsize
 
 # bash aliases
 if [[ -f ~/.bash_aliases ]]; then
     . ~/.bash_aliases
 fi
 
-# bash prompt
-if [[ -f ~/.bash_prompt ]]; then
-    . ~/.bash_prompt
+# bash env
+if [[ -f ~/.bash_env ]]; then
+    . ~/.bash_env
 fi
+
+# bash prompt
+# if [[ -f ~/.bash_prompt ]]; then
+#     . ~/.bash_prompt
+# fi
 
 #############
 # export env
@@ -67,15 +66,21 @@ if [[ -f "/usr/local/bin/brew" ]]; then
 
 fi
 
-# git completion
-echo initializing git completion...
-if [[ -f ~/.git-completion.bash ]]; then
-  . ~/.git-completion.bash
+# direnv
+if [[ -f "/usr/local/bin/direnv" ]]; then
+  echo initializing direnv bash hooks...
+  eval "$(direnv hook bash)"
 fi
 
+# git completion
+# if [[ -f ~/.git-completion.bash ]]; then
+#   echo initializing git completion...
+#   . ~/.git-completion.bash
+# fi
+
 # nvm
-echo preparing nvm enviroments...
 if [[ -d "/usr/local/opt/nvm" ]]; then
+  echo initializing nvm enviroments...
   export NVM_DIR="$HOME/.nvm"
   source "/usr/local/opt/nvm/nvm.sh"
 fi
@@ -85,7 +90,8 @@ export PATH=~/.composer/vendor/bin:$PATH
 
 # add go bin directory to path
 export GOROOT=/usr/local/go
-export GOPATH=/Users/stdrickforce/go
+export GOPATH=/Users/stdrickforce/.go
+export GOBIN=/Users/stdrickforce/.go/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # homebrew
@@ -104,4 +110,15 @@ function man() {
             man "$@"
 }
 
+source /Users/stdrickforce/.sote/bin/sote
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+
+# Upgrade bison to 3.x
+PATH="/usr/local/opt/bison/bin:$PATH"
+
+# clear current bash outputs.
 clear
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
