@@ -64,6 +64,7 @@ plugins=(
   kubectl
   composer
   go
+  mvn
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -96,6 +97,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+if [[ -f "/usr/local/bin/direnv" ]]; then
+  echo initializing direnv zsh hooks...
+  eval "$(direnv hook zsh)"
+fi
 
 source ~/.bashrc
 source ~/.bash_profile

@@ -1,4 +1,6 @@
-alias vi='/usr/local/bin/vim'
+alias vi='env vim'
+
+alias diff='colordiff'
 
 alias reload='source ~/.bashrc'
 
@@ -59,4 +61,7 @@ alias drun="docker run --rm -ti"
 
 alias klocal="kubectl config use-context minikube"
 alias kdev="kubectl config use-context dev"
-alias kprod="kubectl config use-context prod"
+alias krevenue="kubectl config use-context revenue"
+alias ksearch="kubectl config use-context search"
+
+alias etcdctl="ETCDCTL_API=3 etcdctl"

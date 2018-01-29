@@ -30,7 +30,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'solarnz/thrift.vim'
 Plugin 'tobyS/pdv'
@@ -183,10 +183,10 @@ noremap gw :tabclose<cr>
 map <Leader>= <C-w>=
 
 " Close the current buffer
-map <leader>d :Bclose<cr>
+" map <leader>d :Bclose<cr>
 
 " Close all the buffers
-map <leader>D :1,300 bd<cr>:q<cr>
+" map <leader>D :1,300 bd<cr>:q<cr>
 
 " When pressing <leader>cd switch to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>
@@ -305,11 +305,12 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
 
 " YouCompleteMe
 
-    let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+    let g:ycm_always_populate_location_list = 1
     let g:ycm_confirm_extra_conf = 0
+    let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
     " nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-    " nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+    nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
     nnoremap <leader>gt :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
     cmap ycd :YcmDiags<CR>
@@ -317,8 +318,12 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
 " Syntastic
 
     let g:syntastic_auto_jump=1
-    let g:syntastic_check_on_open=1
-    let g:syntastic_ignore_files = [".*\.html$"]
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+
+    " let g:syntastic_ignore_files = [".*\.html$"]
 
     " let g:syntastic_c_compiler = 'gcc'
     " let g:syntastic_c_compiler_options = '
@@ -344,11 +349,11 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     let g:syntastic_php_phpcs_args = "--standard=PSR2"
     let g:syntastic_php_phpmd_post_args = "xml /Users/stdrickforce/.vim/syntastic/phpmd.xml"
 
-    " javascript
-    let g:syntastic_javascript_checkers = ['jshint']
-
     " golang
     let g:syntastic_go_checkers = ['go']
+
+    " javascript
+    let g:syntastic_javascript_checkers = ['eslint']
 
     " yaml
     let g:syntastic_yaml_checkers = ['yamllint']
