@@ -8,17 +8,12 @@ local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 # Determine active Python virtualenv details.
 function set_python_version () {
   version="$(python --version 2>&1 | awk '{print $2}')"
-  PYTHON_VERSION="%{$fg[blue]%}[py: $version]%{$reset_color%}"
+  PYTHON_VERSION="%{$fg[cyan]%}[py: $version]%{$reset_color%}"
 }
 
 function set_php_version () {
   version="$(php -r 'echo phpversion();' 2> /dev/null)"
   PHP_VERSION="%{$fg[magenta]%}[php: $version]%{$reset_color%}"
-}
-
-function set_ruby_version () {
-  version="$(ruby -v | awk '{print $2}')"
-  RUBY_XVERSION="%{$fg[red]%}[ruby: $version]%{$reset_color%}"
 }
 
 function set_node_version () {
@@ -33,13 +28,10 @@ function language_version() {
   # Set the PHP_VERSION variable.
   set_php_version
 
-  # Set the RUBY_VERSION variable.
-  set_ruby_version
-
   # Set the NODE_VERSION variable.
   set_node_version
 
-  echo ${PYTHON_VERSION}${PHP_VERSION}${RUBY_XVERSION}${NODE_VERSION}
+  echo ${PYTHON_VERSION}${PHP_VERSION}${NODE_VERSION}
 }
 
 function virtualenv_prompt_info() {
@@ -107,7 +99,7 @@ eval my_orange='$FG[214]'
 function machine_info() {
     if ! test -z "$VIRTUAL_ENV" ; then
         venv=`basename ${VIRTUAL_ENV}`
-        echo "%{$fg[blue]%}($venv)%{$reset_color%}"
+        echo "%{$fg[cyan]%}($venv)%{$reset_color%}"
     else
         echo "$my_gray%n@%m%{$reset_color%}"
     fi

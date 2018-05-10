@@ -34,10 +34,7 @@ collect:
 	rsync ~/.bash_* $(CURDIR)/bash/
 	# zsh
 	rsync ~/.zshrc $(CURDIR)/zsh/
-	rsync ~/.bash_* $(CURDIR)/zsh/
 	# git.
 	cp -r ~/.gitconfig $(CURDIR)/git/
-	# tmux.
-	cp -r ~/.tmux.conf $(CURDIR)/tmux/
 	# vim.
 	cp -r ~/.vimrc $(CURDIR)/vim/

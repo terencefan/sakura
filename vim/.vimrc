@@ -30,8 +30,6 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'solarnz/thrift.vim'
 Plugin 'tobyS/pdv'
 Plugin 'tobyS/vmustache'
@@ -39,6 +37,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'uarun/vim-protobuf'
 Plugin 'vim-scripts/nginx.vim'
 Plugin 'vim-scripts/taglist.vim'
+Plugin 'vim-syntastic/syntastic'
 
 " Color Schemes
 Plugin 'flazz/vim-colorschemes'
@@ -47,8 +46,9 @@ Plugin 'altercation/vim-colors-solarized'
 call vundle#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Environment
+" Environment
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Basics
 set nocompatible               " must be first line
 set background=dark            " Assume a dark background
@@ -72,7 +72,6 @@ set undofile                   " persistent undo
 set undolevels=1000            " maximum number of changes that can be undone
 set undoreload=10000           " maximum number lines to save for undo on a buffer reload
 set undodir=~/.vim/undo
-set foldlevel=2
 
 " auto save/load foldlevel
 " au BufWinLeave * silent mkview
@@ -86,7 +85,7 @@ set clipboard+=unnamed
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vim UI
+" Vim UI
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
@@ -94,57 +93,58 @@ if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"
     let g:solarized_termcolors=256
     let g:solarized_termtrans=1
 endif
+
 set term=builtin_xterm         " Make terminal stuff works
 set t_Co=256
 
-set tabpagemax=15             " only show 15 tabs
-set showmode                  " display the current mode
-
-set cursorline                " highlight current line
-
 if has('cmdline_info')
-    set ruler                      " show the ruler
+    set ruler                   " show the ruler
     set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
-    set showcmd                    " show partial commands in status line and selected characters/lines in visual mode
+    set showcmd                 " show partial commands in status line and selected characters/lines in visual mode
 endif
 
-set laststatus=2
-set backspace=indent,eol,start " Backspace for dummys
-set linespace=0                " No extra spaces between rows
-set nu                         " Line numbers on
-set showmatch                  " Show matching brackets/parenthesis
-set incsearch                  " Find as you type search
-set hlsearch                   " Highlight search terms
-set winminheight=0             " Windows can be 0 line high
-set ignorecase                 " Case insensitive search
-set smartcase                  " Case sensitive when uc present
-set wildmenu                   " Show list instead of just completing
-set wildmode=list:longest,full " Command <Tab> completion, list matches, then longest common part, then all.
-set whichwrap=b,s,h,l,<,>,[,]  " Backspace and cursor keys wrap to
-set scrolljump=5               " Lines to scroll when cursor leaves screen
-set scrolloff=3                " Minimum lines to keep above and below cursor
-set gdefault                   " The /g flag on :s substitutions by default
-set hidden                     " Change buffer - without saving
-set magic                      " Set magic on, for regular expressions
-set autoread                   " Auto reload file on change
-set list
+set laststatus=2                " Always show status bar
+set backspace=indent,eol,start  " Backspace for dummys
+set linespace=0                 " No extra spaces between rows
+set nu                          " Line numbers on
+set showmatch                   " Show matching brackets/parenthesis
+set incsearch                   " Find as you type search
+set hlsearch                    " Highlight search terms
+set winminheight=0              " Windows can be 0 line high
+set ignorecase                  " Case insensitive search
+set smartcase                   " Case sensitive when uc present
+set wildmenu                    " Show list instead of just completing
+set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap to
+set scrolljump=5                " Lines to scroll when cursor leaves screen
+set scrolloff=3                 " Minimum lines to keep above and below cursor
+set gdefault                    " The /g flag on :s substitutions by default
+set hidden                      " Change buffer - without saving
+set magic                       " Set magic on, for regular expressions
+set autoread                    " Auto reload file on change
+set tabpagemax=15               " Only show 15 tabs
+set showmode                    " Display the current mode
+set cursorline                  " highlight current line
+set foldlevel=2                 " Set default foldlevel to 2
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Formatting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set wrap                        " wrap long lines
+set linebreak                   " set linebreak
+set textwidth=0                 " sets the text width
+set autoindent                  " Auto indent
+set smartindent                 " Smart indet
+set expandtab                   " tabs are spaces, not tabs
+set smarttab                    " Smart tab
+set shiftwidth=4                " use indents of 4 spaces
+set tabstop=4                   " an indentation every four columns
+set softtabstop=4               " let backspace delete indent
+set cc=100                      " Set ruler to 100
+set list                        " Make unwatched spaces visible.
 set listchars=tab:>\ ,trail:\ ,extends:#,nbsp:\  " Highlight problematic whitespace
-set cc=100
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Formatting
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set wrap            " wrap long lines
-set linebreak       " set linebreak
-set textwidth=0     " sets the text width
-set autoindent      " Auto indent
-set smartindent     " Smart indet
-set expandtab       " tabs are spaces, not tabs
-set smarttab        " Smart tab
-set shiftwidth=4    " use indents of 4 spaces
-set tabstop=4       " an indentation every four columns
-set softtabstop=4   " let backspace delete indent
 
 " Remove trailing whitespaces and ^M chars
 autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
@@ -153,6 +153,7 @@ autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:va
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 "The default leader is '\', but many people prefer ',' as it's in a standard
 "location
 let mapleader = ','
@@ -206,6 +207,7 @@ nmap f7 :set foldlevel=7<CR>
 nmap f8 :set foldlevel=8<CR>
 nmap f9 :set foldlevel=9<CR>
 
+" Toggle foldlevel
 nmap <space> za
 " nmap <C-k> zr
 " nmap <C-j> zm
@@ -243,10 +245,6 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Misc
-    let g:NERDShutUp=1
-    let b:match_ignorecase = 1
-
 " Ctags
     set tags=./tags;/,~/.vimtags
 
@@ -269,6 +267,33 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     let NERDTreeQuitOnOpen=1
     let NERDTreeShowHidden=1
     let NERDTreeKeepTreeInNewTab=1
+
+" NerdCommenter
+    " Add spaces after comment delimiters by default
+    let g:NERDSpaceDelims = 1
+
+    " Use compact syntax for prettified multi-line comments
+    let g:NERDCompactSexyComs = 1
+
+    " Align line-wise comment delimiters flush left instead of following code indentation
+    let g:NERDDefaultAlign = 'left'
+
+    " Set a language to use its alternate delimiters by default
+    let g:NERDAltDelims_java = 1
+
+    " Add your own custom formats or override the defaults
+    let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+    " Allow commenting and inverting empty lines (useful when commenting a region)
+    let g:NERDCommentEmptyLines = 1
+
+    " Enable trimming of trailing whitespace when uncommenting
+    let g:NERDTrimTrailingWhitespace = 1
+
+    " Disable default mappings
+    let g:NERDCreateDefaultMappings = 0
+
+    map <leader>cc <plug>NERDCommenterToggle
 
 " Taglist
   map <C-t> :TlistToggle<CR>
@@ -304,10 +329,11 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     nnoremap <silent> <leader>gh :GitGutterLineHighlightsToggle<CR>
 
 " YouCompleteMe
-
     let g:ycm_always_populate_location_list = 1
     let g:ycm_confirm_extra_conf = 0
     let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
+    let g:ycm_python_binary_path = '/usr/bin/python'
 
     " nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
     nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
@@ -315,39 +341,31 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
 
     cmap ycd :YcmDiags<CR>
 
-" Syntastic
+    " make YCM compatible with UltiSnips (using supertab)
+    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+    let g:SuperTabDefaultCompletionType = '<C-n>'
 
+    " better key bindings for UltiSnipsExpandTrigger
+    let g:UltiSnipsExpandTrigger = "<tab>"
+    let g:UltiSnipsJumpForwardTrigger = "<tab>"
+    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" Syntastic
     let g:syntastic_auto_jump=1
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
+    " let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
-
-    " let g:syntastic_ignore_files = [".*\.html$"]
-
-    " let g:syntastic_c_compiler = 'gcc'
-    " let g:syntastic_c_compiler_options = '
-    "     \ -std=c++11 -stdlib=libc++
-    "     \ -I/usr/local/Cellar/php70/7.0.20_12/include/php/
-    "     \ -I/usr/local/Cellar/php70/7.0.20_12/include/php/main/
-    "     \ -I/usr/local/Cellar/php70/7.0.20_12/include/php/Zend/
-    "     \ -I/usr/local/Cellar/php70/7.0.20_12/include/php/TSRM/
-    " \'
-
-    " cpp
-    " let g:syntastic_cpp_compiler = 'g++'
-    " let g:syntastic_cpp_compiler_options = '
-    "     \ -std=c++11 -stdlib=libc++
-    " \'
 
     " python
     let g:syntastic_python_checkers = ['flake8']
     let g:syntastic_python_flake8_args = '--ignore=F404,E501'
 
     " php
-    let g:syntastic_php_checkers = ['php', 'phpmd']
-    let g:syntastic_php_phpcs_args = "--standard=PSR2"
-    let g:syntastic_php_phpmd_post_args = "xml /Users/stdrickforce/.vim/syntastic/phpmd.xml"
+    " let g:syntastic_php_checkers = ['php']
+    " let g:syntastic_php_phpcs_args = "--standard=PSR2"
+    " let g:syntastic_php_phpmd_post_args = "xml /Users/stdrickforce/.vim/syntastic/phpmd.xml"
 
     " golang
     let g:syntastic_go_checkers = ['go']
@@ -358,21 +376,18 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     " yaml
     let g:syntastic_yaml_checkers = ['yamllint']
     let g:syntastic_yaml_yamllint_args = "-d relaxed"
-
     au Filetype yaml let g:syntastic_quiet_messages={'level':'warnings'}
+
+    let g:syntastic_html_validator_parser = 'html5'
 
 " Powerline
     let g:Powerline_symbols = 'fancy'
-    python from powerline.vim import setup as powerline_setup
-    python powerline_setup()
-    python del powerline_setup
-
+    python3 from powerline.vim import setup as powerline_setup
+    python3 powerline_setup()
+    python3 del powerline_setup
 
 " vim-go
     let g:go_fmt_command = "goimports"
-
-" vim-phpfmt
-    let g:phpfmt_standard = 'PSR2'
 
 " vim-autoformat
     let g:formatter_yapf_style = "facebook"
@@ -381,11 +396,13 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     let g:formatters_c = ["astyle_cpp"]
     let g:formatters_cpp = ["astyle_cpp"]
 
-    au BufWritePre *.py :Autoformat
+    " au BufWritePre *.py :Autoformat
     au BufWritePre *.h :Autoformat
     au BufWritePre *.c :Autoformat
-    au BufWritePre *.cc :Autoformat
+    " au BufWritePre *.cc :Autoformat
     au BufWritePre *.cpp :Autoformat
+
+    let g:phpfmt_standard = 'PSR2'
 
 " vim-cpp-enhanced-highlight
     let g:cpp_class_scope_highlight = 1
@@ -410,13 +427,13 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     autocmd BufRead,BufNewFile *.zsh set filetype=sh
     autocmd BufRead,BufNewFile *.zsh-theme set filetype=sh
 
-" Nginx Filetypes.
+    " Nginx Filetypes.
     autocmd BufRead,BufNewFile /etc/nginx/* set filetype=nginx
     autocmd BufRead,BufNewFile /usr/local/etc/nginx/* set filetype=nginx
     autocmd BufRead,BufNewFile nginx.conf set filetype=nginx
 
-" K8s.
-    autocmd BufRead,BufNewFile /Users/stdrickforce/.kube/config set filetype=yaml
+    " Kubernetes.
+    autocmd BufRead,BufNewFile $HOME/.kube/config set filetype=yaml
 
 " Indent
     au Filetype python setlocal shiftwidth=4 tabstop=4 softtabstop=4
@@ -429,19 +446,22 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     au Filetype yaml set foldlevel=9
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Funtion define
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " python fold
 set foldmethod=indent
 
 " Golang
+let g:go_def_mode = 'godef'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Funtion define
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+autocmd filetype crontab setlocal nobackup nowritebackup
 
 " Auto add .py header.
 function! PyHeader()
@@ -463,26 +483,6 @@ function! PyHeader()
     call append(5, '')
     echohl WarningMsg | echo "Successful in adding the header." | echohl None
 endf
-
-" Auto add header for php files.
-" Just for Haojing
-function! PhpHeader()
-  let line = getline(1)
-  if !(line =~ '\<\?php')
-    call append(0, '<?php')
-  endif
-
-  let line = getline(2)
-  if !(line =~ '\/[\/\*]S*')
-    call append(1, '// fantengyuan@baixing.com')
-  endif
-endf
-
-" Haojing fixes.
-let phpcs_hj = "--standard=/Users/stdrickforce/workspace/baixing/haojing/phpcs_ruleset.xml"
-au bufnewfile,bufread */haojing*/*.php setlocal noexpandtab nolist
-au bufnewfile,bufread */haojing*/*.php let g:phpfmt_options = phpcs_hj
-au bufnewfile,bufread */haojing/*.php call PhpHeader()
 
 " python header.
 au bufnewfile,bufread *.py call PyHeader()
@@ -572,13 +572,3 @@ nnoremap sr :call K8sReplace()<CR>
 
 nnoremap rr :call Run()<CR>
 nnoremap rl :source ~/.vimrc<CR>
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"

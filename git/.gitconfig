@@ -1,26 +1,33 @@
 [color]
-  ui = auto
+    ui = auto
 [alias]
-  co = checkout
-  br = branch
-  ci = commit
-  st = status
-  last = log -1 HEAD
-  unstage = reset HEAD --
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    last = log -1 HEAD
+    unstage = reset HEAD --
 [core]
-  editor = vim
-  autocrlf = false
-  safecrlf = true
+    editor = vim
+    autocrlf = false
+    safecrlf = true
+    gitproxy = socks5://127.0.0.1:1086
 [push]
-  default = current
+    default = current
 [rerere]
-  enabled = 1
-  autoupdate = 1
+    enabled = 1
+    autoupdate = 1
 [user]
-  name = stdrickforce
-  email = stdrickforce@gmail.com
+	name = fantengyuan
+	email = fantengyuan@meituan.com
 [filter "lfs"]
-  required = true
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	clean = git-lfs clean -- %f
+    required = true
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    clean = git-lfs clean -- %f
+[http]
+    proxy = http://127.0.0.1:1087
+[https]
+    proxy = http://127.0.0.1:1087
+[url "ssh://git@git.dianpingoa.com/"]
+	insteadOf = https://dianpingoa.com/

@@ -39,7 +39,7 @@ alias rshj='rsync -hlrtuOP --del --exclude-from ~/.rsync_ignore ~/workspace/baix
 
 # gcc & g++
 alias g++='g++ -std=c++11'
-alias gcc='gcc -std=c89'
+alias gcc='gcc -std=c99'
 
 # compile thrift file to php
 alias ctp='thrift --gen php:server,psr4 -out build'
@@ -52,8 +52,8 @@ alias docker-clean-image="docker images | grep none | awk '{print \$3}' | xargs 
 alias remake-php-configure="phpize --clean && phpize"
 
 # deploy my blog
-alias dpb="hexo --cwd /Users/stdrickforce/workspace/blog deploy --generate"
-alias cdb="cd /Users/stdrickforce/workspace/blog/source/_posts"
+alias dpb="hexo --cwd $HOME/workspace/blog deploy --generate"
+alias cdb="cd $HOME/workspace/blog/source/_posts"
 
 alias dk8s="eval \`minikube docker-env\`"
 
@@ -65,3 +65,8 @@ alias krevenue="kubectl config use-context revenue"
 alias ksearch="kubectl config use-context search"
 
 alias etcdctl="ETCDCTL_API=3 etcdctl"
+
+alias fuchrome="ps -ax | grep \"Google Chrome\" | head -n 1 | awk '{print \$1}' | xargs kill -9"
+alias fuckjvm="lsof -i:1099 | awk '{print $2}' | tail -n 1 | xargs kill -9"
+
+alias vcentos="cd $HOME/workspace/vagrants/centos7 && vagrant ssh"
