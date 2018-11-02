@@ -22,9 +22,9 @@ alias cdin='cd ~/workspace/inority.com/'
 # Sakura.
 alias cdsa='cd ~/workspace/sakura/'
 
-# Haojing.
-alias cdh='cd ~/workspace/baixing/haojing/'
-alias hpu='phpunit -c ~/workspace/baixing/haojing/unittest/phpunit.xml'
+# cat
+alias cdc='cd ~/workspace/cat'
+alias cdcf='cd ~/workspace/cat/cat-home/src/main/webapp/next_frontend'
 
 # baixing
 # -h for human readable

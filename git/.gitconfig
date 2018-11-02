@@ -18,7 +18,7 @@
     enabled = 1
     autoupdate = 1
 [user]
-	name = fantengyuan
+	name = terence.fan
 	email = fantengyuan@meituan.com
 [filter "lfs"]
     required = true
@@ -29,5 +29,5 @@
     proxy = http://127.0.0.1:1087
 [https]
     proxy = http://127.0.0.1:1087
-[url "ssh://git@git.dianpingoa.com/"]
-	insteadOf = https://dianpingoa.com/
+;[url "ssh://git@git.dianpingoa.com/"]
+;	insteadOf = https://dianpingoa.com/

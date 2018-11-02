@@ -81,7 +81,7 @@ set undodir=~/.vim/undo
 " au! BufWritePost ~/.vimrc source ~/.vimrc
 
 " set clipboard
-set clipboard+=unnamed
+set clipboard=unnamed
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -396,11 +396,11 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     let g:formatters_c = ["astyle_cpp"]
     let g:formatters_cpp = ["astyle_cpp"]
 
-    " au BufWritePre *.py :Autoformat
     au BufWritePre *.h :Autoformat
     au BufWritePre *.c :Autoformat
     " au BufWritePre *.cc :Autoformat
     au BufWritePre *.cpp :Autoformat
+    au BufWritePre *.py :Autoformat
 
     let g:phpfmt_standard = 'PSR2'
 
@@ -479,7 +479,7 @@ function! PyHeader()
     call append(1, '# -*- coding: utf-8 -*-')
     call append(2, '')
     call append(3, '# Author: stdrickforce (Tengyuan Fan)')
-    call append(4, '# Email: <stdrickforce@gmail.com> <fantengyuan@baixing.com>')
+    call append(4, '# Email: <stdrickforce@gmail.com> <fantengyuan@meituan.com>')
     call append(5, '')
     echohl WarningMsg | echo "Successful in adding the header." | echohl None
 endf

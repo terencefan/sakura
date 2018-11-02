@@ -90,7 +90,7 @@ fi
 
 # es
 export ES_HOME=/Users/terence/workspace/elasticsearch-6.2.4
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home
 export PATH=$ES_HOME/bin:$JAVA_HOME/bin:$PATH
 
 
@@ -98,16 +98,16 @@ export PATH=$ES_HOME/bin:$JAVA_HOME/bin:$PATH
 export PATH=~/.composer/vendor/bin:$PATH
 
 # add go bin directory to path
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/.go
-export GOBIN=$HOME/.go/bin
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GOROOT=/usr/local/Cellar/go/1.10.2/libexec
+export GOPATH=$HOME/go
+export GOBIN=$HOME/go/bin
+export PATH=$PATH:/usr/local/opt/go/libexec/bin:$GOPATH/bin
+
+# http proxy address (shadowsocks)
+# export http_proxy=http://127.0.0.1:1087/
 
 # homebrew
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-
-# maven
-export PATH="$PATH:$HOME/workspace/apache-maven-3.5.2/bin"
 
 # make man colorful
 function man() {
