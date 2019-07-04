@@ -59,11 +59,6 @@ if [[ -f "/usr/local/bin/brew" ]]; then
     export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
   fi
 
-  # auto select php-version to 5.5
-  if [[ -d "/usr/local/opt/php-version" ]]; then
-    source /usr/local/opt/php-version/php-version.sh && php-version 5.5
-  fi
-
 fi
 
 # direnv
@@ -90,9 +85,12 @@ export PATH=~/.composer/vendor/bin:$PATH
 
 # add go bin directory to path
 export GOROOT=/usr/local/go
-export GOPATH=/Users/stdrickforce/.go
-export GOBIN=/Users/stdrickforce/.go/bin
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GOPATH=$HOME/go
+export GOBIN=$HOME/go/bin
+export PATH=$PATH:$GOROOT/bin:$GOBIN
+
+# add cargo(rust) bin directory to path
+export PATH=$PATH:$HOME/.cargo/bin
 
 # homebrew
 export PATH="/usr/local/sbin:$PATH"
@@ -110,8 +108,6 @@ function man() {
             man "$@"
 }
 
-source /Users/stdrickforce/.sote/bin/sote
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 
 # Upgrade bison to 3.x
@@ -122,3 +118,7 @@ clear
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Set http / https proxies to accelerate downloading and network access.
+# export http_proxy=http://127.0.0.1:1087;
+# export https_proxy=http://127.0.0.1:1087;

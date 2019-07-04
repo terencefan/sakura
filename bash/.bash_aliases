@@ -1,4 +1,4 @@
-alias vi='/usr/local/bin/vim'
+alias vi='vim'
 
 alias reload='source ~/.bashrc'
 

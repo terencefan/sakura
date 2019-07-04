@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/stdrickforce/.oh-my-zsh
+export ZSH=/Users/terencefan/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -64,6 +64,7 @@ plugins=(
   kubectl
   composer
   go
+  mvn
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -91,11 +92,16 @@ source $ZSH/oh-my-zsh.sh
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# For a full list of active aliases, run alias.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+if [[ -f "/usr/local/bin/direnv" ]]; then
+  echo initializing direnv zsh hooks...
+  eval "$(direnv hook zsh)"
+fi
 
 source ~/.bashrc
 source ~/.bash_profile

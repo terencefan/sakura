@@ -13,6 +13,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'SirVer/ultisnips'
 Plugin 'StanAngeloff/php.vim'
+Plugin 'Townk/vim-autoclose'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'beanworks/vim-phpfmt'
@@ -345,7 +346,7 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     let g:syntastic_php_phpmd_post_args = "xml /Users/stdrickforce/.vim/syntastic/phpmd.xml"
 
     " javascript
-    let g:syntastic_javascript_checkers = ['jshint']
+    let g:syntastic_javascript_checkers = ['eslint']
 
     " golang
     let g:syntastic_go_checkers = ['go']
@@ -358,9 +359,9 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
 
 " Powerline
     let g:Powerline_symbols = 'fancy'
-    python from powerline.vim import setup as powerline_setup
-    python powerline_setup()
-    python del powerline_setup
+    python3 from powerline.vim import setup as powerline_setup
+    python3 powerline_setup()
+    python3 del powerline_setup
 
 
 " vim-go
@@ -375,6 +376,8 @@ au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLo
     let g:formatdef_astyle_cpp = '"astyle -A14 -s2 -p -xC80 -f"'
     let g:formatters_c = ["astyle_cpp"]
     let g:formatters_cpp = ["astyle_cpp"]
+
+    let g:formatdef_python = ["autopep8"]
 
     au BufWritePre *.py :Autoformat
     au BufWritePre *.h :Autoformat
@@ -454,7 +457,7 @@ function! PyHeader()
     call append(1, '# -*- coding: utf-8 -*-')
     call append(2, '')
     call append(3, '# Author: stdrickforce (Tengyuan Fan)')
-    call append(4, '# Email: <stdrickforce@gmail.com> <fantengyuan@baixing.com>')
+    call append(4, '# Email: <stdrickforce@gmail.com>')
     call append(5, '')
     echohl WarningMsg | echo "Successful in adding the header." | echohl None
 endf
